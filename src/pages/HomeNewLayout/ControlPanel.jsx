@@ -21,7 +21,7 @@ export default function ControlPanel() {
   const beepIntervalRef = useRef(null); // Reference for the beep interval
 
   // Mocked counts for alarm and notification (replace with real data)
-  const alarmCount = 2; // Example count for alarms
+  // const alarmCount = 2; // Example count for alarms
   const notificationCount = 2; // Example count for notifications
 
   const toggleStartPatrol = () => {
@@ -35,7 +35,7 @@ export default function ControlPanel() {
   };
 
   const toggleAlert = () => {
-    if (!isAlertActive && alarmCount > 1 && notificationCount > 1) {
+    if (!isAlertActive && notificationCount > 1) {
       // Start alert with toggling and sound only if counts are greater than 1
       startBeeping();
       startColorToggle();
