@@ -8,6 +8,7 @@ import { stopPatrol, startPatrol } from "store";
 import GPSIcon from "components/GPS-top";
 import CaptureSlider from "components/CaptureSlider";
 import { LatestPatrolingDetail } from "./LatestPatrolingDetail";
+import { LastPatrolStrap } from "./LastPatrolStrap";
 
 export const Carview = ({ latestCaptureData }) => {
   const [isPatrolStarted, setIsPatrolStarted] = useState(false);
@@ -74,48 +75,7 @@ export const Carview = ({ latestCaptureData }) => {
           <div className="flex flex-row">
             {/* CaptureSlider Component on the Left */}
             <CaptureSlider dataArray={latestCaptureData.Images} />
-
-            {/* Heading Items on the Right */}
-            <div className="flex-1 flex flex-col gap-1">
-              <LatestPatrolingDetail
-                label="Camera ID"
-                detail={latestCaptureData?.CameraID}
-              />
-              <LatestPatrolingDetail
-                label="License No/State"
-                detail={
-                  latestCaptureData?.LicensePlate && latestCaptureData?.State
-                    ? `${latestCaptureData?.LicensePlate}/${latestCaptureData?.State}`
-                    : "--"
-                }
-              />
-
-              <LatestPatrolingDetail
-                label=" Make/Model/Color"
-                detail={
-                  latestCaptureData?.CarModel &&
-                  latestCaptureData?.CarMake &&
-                  latestCaptureData?.CarColor
-                    ? `${latestCaptureData?.CarMake}/${latestCaptureData?.CarModel}/${latestCaptureData?.CarColor}`
-                    : "--"
-                }
-              />
-              <LatestPatrolingDetail
-                label=" Date & Time/GPS"
-                detail={
-                  latestCaptureData ? (
-                    <div className="flex items-center gap-2">
-                      <Text className="text-black-900 dark:text-black-900 whitespace-nowrap">
-                        {formatDate(latestCaptureData?.DateTime)}
-                      </Text>
-                      <GPSIcon />
-                    </div>
-                  ) : (
-                    "--"
-                  )
-                }
-              />
-            </div>
+            <LastPatrolStrap latestCaptureData={latestCaptureData} />
           </div>
         </div>
       ) : (

@@ -1,11 +1,12 @@
 import React from "react";
-import { LatestPatrolingDetail } from "./LatestPatrolingDetail";
 import { formatDate } from "util/NumberFormatters";
 import GPSIcon from "components/GPS-top";
+import { LatestPatrolingDetail } from "./LatestPatrolingDetail";
+import { Text } from "components";
 
 export const LastPatrolStrap = ({ latestCaptureData }) => {
   return (
-    <div className="flex-1 flex flex-col gap-4">
+    <div className="flex-1 flex flex-col gap-1">
       <LatestPatrolingDetail
         label="Camera ID"
         detail={latestCaptureData?.CameraID}
@@ -30,7 +31,7 @@ export const LastPatrolStrap = ({ latestCaptureData }) => {
         }
       />
       <LatestPatrolingDetail
-        label=" Date & Time/GPS"
+        label="Date & Time/GPS"
         detail={
           latestCaptureData ? (
             <div className="flex items-center gap-2">
