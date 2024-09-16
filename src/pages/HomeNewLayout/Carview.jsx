@@ -63,15 +63,16 @@ export const Carview = ({ latestCaptureData }) => {
   }, [isDarkMode]);
   return (
     <>
-      {latestCaptureData ? (
-        <div className="flex flex-col gap-4 bg-white px-5  items-center">
+    <div className="flex flex-col gap-4 bg-white px-5 items-center heading-bar">
           <Heading
             size="headinglg"
             as="h1"
             className="!font-lato1 text-black-900 dark:text-white-a700 mt-2"
           >
             Active Patrol
-          </Heading>
+          </Heading></div>
+      {latestCaptureData ? (
+        <div className="flex flex-col gap-4 bg-white px-5 items-center">
           <div
             style={{
               display: "grid",

@@ -104,3 +104,15 @@ table {
 .tooltip-container:hover .hover-svg {
   fill: blue;
 }
+
+/* New layout CSS */
+
+.control-button-text
+{
+ font-size: 28px;
+}
+
+.heading-bar
+{
+  background-color: lightgray;
+}

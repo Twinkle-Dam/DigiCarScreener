@@ -35,7 +35,7 @@ export default function ScanningTable() {
               as="h4"
               className="flex justify-center items-center font-bold border-r w-fill-available border-solid border-gray-300_01 bg-gray-100 pl-2.5 pr-1"
             >
-              Thumbnail
+            
             </Heading>
           </div>
         ),
@@ -70,11 +70,6 @@ export default function ScanningTable() {
         cell: (info) => (
           <Text className="w-full flex justify-center align-middle leading-4 whitespace-nowrap">
             {formatDate(info.getValue())}
-            <br />
-            {formatGPSLocation(info?.row?.original?.GPSLocation)}
-            <div className="flex whitespace-nowrap items-end text-xs ml-[-42px]">
-              <GPSIcon />
-            </div>
           </Text>
         ),
         header: (info) => (
@@ -83,7 +78,7 @@ export default function ScanningTable() {
               as="h6"
               className="bg-gray-100 whitespace-nowrap py-3 w-fill-available"
             >
-              Date & Time/GPS
+              Date & Time
             </Heading>
           </div>
         ),
@@ -171,7 +166,7 @@ export default function ScanningTable() {
       }),
 
       // Type Column
-      tableColumnHelper.accessor("CarType", {
+      tableColumnHelper.accessor("BodyType", {
         cell: (info) => (
           <Text className="flex justify-center text-center">
             {info.getValue() || "--"}
@@ -194,7 +189,10 @@ export default function ScanningTable() {
       tableColumnHelper.accessor("Location", {
         cell: (info) => (
           <Text className="flex justify-center items-center text-center p-2 truncate">
-            {info.getValue() || "--"}
+            <div>{formatGPSLocation(info?.row?.original?.GPSLocation)}</div>
+            <div className="flex whitespace-nowrap items-end text-xs">
+              <GPSIcon />
+            </div>
           </Text>
         ),
         header: (info) => (

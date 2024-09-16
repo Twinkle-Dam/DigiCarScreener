@@ -17,15 +17,14 @@ export const AlarmNotification = () => {
       <div className="mt-1 flex flex-wrap items-center">
         <h3 className="text-lg font-lato1 dark:text-white-a700">
           Alarms & Notifications
-        </h3>
-        <Text className="text-gray-400 text-[0.7em] ml-1">
-          (Status: No Alerts Changes to Alert with details of the LPR and Alert
-          Type during violation)
-        </Text>
-        <h4 className="ml-1 flex h-[30px] w-[30px] mr-2 items-center justify-center rounded-[10px] bg-black-900 text-center font-lato1 text-white-a700 dark:bg-white-a700 dark:text-black-900">
+        </h3><h4 className="ml-1 flex h-[30px] w-[30px] mr-2 items-center justify-center rounded-[10px] bg-black-900 text-center font-lato1 text-white-a700 dark:bg-white-a700 dark:text-black-900">
           {carData.length &&
             carData.filter((car) => car.AlertLevel !== "None").length}
         </h4>
+        <Text className="text-gray-400 text-[0.7em] ml-1">
+          (No Alerts or Changes to Alert with details of the LPR and Alert
+          Type during violation)
+        </Text>
       </div>
 
       {/* Scrollable Content Section */}

@@ -14,7 +14,7 @@ export default function LoginscreenPage() {
   return (
     <>
       <Helmet>
-        <title>Login screen 22</title>
+        <title>Login screen</title>
         <meta
           name="description"
           content="Web site created using create-react-app"
@@ -76,7 +76,7 @@ export default function LoginscreenPage() {
               />
               <Button
                 onClick={(e) => {
-                  navigate("/homepage");
+                  navigate("/homepagenew");
                 }}
                 className="flex h-[46px] flex-row items-center justify-center self-stretch border border-solid border-black-900 px-[33px] text-center font-lato1 text-[14px] font-semibold uppercase tracking-[-0.27px] dark:text-dark-base  text-black-900 sm:px-5"
               >

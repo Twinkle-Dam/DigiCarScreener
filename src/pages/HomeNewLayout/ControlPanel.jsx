@@ -111,7 +111,7 @@ export default function ControlPanel() {
   return (
     <>
       {/* Centered Heading */}
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center heading-bar">
         <Heading
           size="headinglg"
           as="h1"
@@ -135,7 +135,7 @@ export default function ControlPanel() {
               className="h-[24px] w-[24px]"
             />
           ) : (
-            <h2 className="!font-lato1 uppercase tracking-[-0.27px]">Start</h2>
+            <h2 className="!font-lato1 uppercase tracking-[-0.27px] control-button-text">Start</h2>
           )}
         </button>
 
@@ -151,7 +151,7 @@ export default function ControlPanel() {
               className="h-[24px] w-[24px]"
             />
           ) : (
-            <h2 className="!font-lato1 uppercase tracking-[-0.27px]">Stop</h2>
+            <h2 className="!font-lato1 uppercase tracking-[-0.27px] control-button-text">Stop</h2>
           )}
         </button>
 
@@ -167,7 +167,7 @@ export default function ControlPanel() {
               className="h-[24px] w-[24px]"
             />
           ) : (
-            <h2 className="!font-lato1 uppercase tracking-[-0.27px]">Alert</h2>
+            <h2 className="!font-lato1 uppercase tracking-[-0.27px] control-button-text">Alert</h2>
           )}
         </button>
       </div>

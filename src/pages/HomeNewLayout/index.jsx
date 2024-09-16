@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <>
       <Helmet>
-        <title>Home page</title>
+        <title>Patrol page</title>
         <meta
           name="description"
           content="Web site created using create-react-app"
