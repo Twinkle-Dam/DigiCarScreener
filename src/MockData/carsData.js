@@ -3,6 +3,8 @@ export const carData = [
     CameraID: "Front#1234A",
     CarMake: "Toyota",
     CarModel: "Camry",
+    CarType: "High",
+    Location: "Australia",
     CarColor: "Blue",
     LicensePlate: "ABC1234",
     State: "CA",
@@ -21,6 +23,8 @@ export const carData = [
   },
   {
     CameraID: "Side#5678B",
+    CarType: "High",
+    Location: "New-York",
     CarMake: "Ford",
     CarModel: "F-150",
     CarColor: "White",
@@ -37,6 +41,8 @@ export const carData = [
   },
   {
     CameraID: "Rear#7890C",
+    CarType: "High",
+    Location: "New Jersey",
     CarMake: "Chevrolet",
     CarModel: "Malibu",
     CarColor: "Black",
@@ -55,6 +61,8 @@ export const carData = [
     CameraID: "Front#9012D",
     CarMake: "Nissan",
     CarModel: "Altima",
+    CarType: "Low",
+    Location: "India",
     CarColor: "Gray",
     LicensePlate: "PQR4567",
     State: "NV",
@@ -69,6 +77,8 @@ export const carData = [
   },
   {
     CameraID: "Rear#3456E",
+    CarType: "Low",
+    Location: "Singapore",
     CarMake: "Tesla",
     CarModel: "Model 3",
     CarColor: "Red",
@@ -85,6 +95,8 @@ export const carData = [
   },
   {
     CameraID: "Side#1234F",
+    CarType: "Low",
+    Location: "Africa",
     CarMake: "BMW",
     CarModel: "X5",
     CarColor: "Silver",
@@ -102,6 +114,8 @@ export const carData = [
   {
     CameraID: "Front#5678G",
     CarMake: "Mercedes-Benz",
+    CarType: "Low",
+    Location: "Singapore",
     CarModel: "C-Class",
     CarColor: "Green",
     LicensePlate: "YZA1234",
@@ -118,6 +132,8 @@ export const carData = [
   {
     CameraID: "Rear#7890H",
     CarMake: "Audi",
+    CarType: "High",
+    Location: "New-York",
     CarModel: "A6",
     CarColor: "White",
     LicensePlate: "BCD4567",
@@ -134,6 +150,8 @@ export const carData = [
   {
     CameraID: "Side#3456I",
     CarMake: "Hyundai",
+    CarType: "Low",
+    Location: "India",
     CarModel: "Elantra",
     CarColor: "Blue",
     LicensePlate: "EFG7890",
@@ -149,6 +167,8 @@ export const carData = [
   },
   {
     CameraID: "Front#9012J",
+    CarType: "Low",
+    Location: "Singapore",
     CarMake: "Kia",
     CarModel: "Sorento",
     CarColor: "Gray",
