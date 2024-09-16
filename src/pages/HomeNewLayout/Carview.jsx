@@ -63,7 +63,7 @@ export const Carview = ({ latestCaptureData }) => {
   return (
     <>
       {latestCaptureData ? (
-        <div className="flex flex-col gap-4 bg-white px-5 py-1 items-center">
+        <div className="flex flex-col gap-4 bg-white px-5  items-center">
           <Heading
             size="headinglg"
             as="h1"
@@ -76,7 +76,7 @@ export const Carview = ({ latestCaptureData }) => {
             <CaptureSlider dataArray={latestCaptureData.Images} />
 
             {/* Heading Items on the Right */}
-            <div className="flex-1 flex flex-col gap-4">
+            <div className="flex-1 flex flex-col gap-1">
               <LatestPatrolingDetail
                 label="Camera ID"
                 detail={latestCaptureData?.CameraID}

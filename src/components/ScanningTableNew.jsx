@@ -125,13 +125,13 @@ export default function ScanningTable() {
   }, []);
 
   return (
-    <div className="w-[80%]">
+    <div className="w-[90%]">
       {/* <Table /> */}
       <div className="flex gap-2.5 bg-white-a700 dark:bg-dark-700 md:mx-0 md:flex-col">
         <ReactTable
           size="xs"
           variant="striped"
-          bodyProps={{ className: "max-h-10" }}
+          bodyProps={{ className: "max-h-4" }}
           headerProps={{
             className:
               "border-gray-300_01 border-t border-l border-r border-solid dark:border-dark-600 h-[32px]",
