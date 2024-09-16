@@ -29,7 +29,7 @@ export default function LoginscreenPage() {
           />
           <div className="relative ml-[-156px] flex w-[24%] flex-col items-center gap-[22px] bg-white-a700 p-5 shadow-xs md:ml-0 md:w-full md:px-5 z-[1]">
             <Text as="p" className="!font-kronaone">
-              LOGO
+              <img src="images/company_logo.png" alt="" />
             </Text>
             <a href="#">
               <Heading as="h1">Log In</Heading>

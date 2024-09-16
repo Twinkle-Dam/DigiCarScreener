@@ -1,9 +1,8 @@
 import React from "react";
 import { useRoutes } from "react-router-dom";
-import Home from "pages/Home";
 import NotFound from "pages/NotFound";
 import Homepage from "pages/Homepage";
-import HomepageNew from "pages/Homepage";
+import Home from "pages/HomeNewLayout";
 
 import LoginscreenPage from "pages/Loginscreen";
 import SplashscreenRow from "pages/Splashscreen/SplashscreenRow";
@@ -24,7 +23,7 @@ const ProjectRoutes = () => {
 
     {
       path: "homepageNew",
-      element: <HomepageNew />,
+      element: <Home />,
     },
     {
       path: "list",

@@ -5,12 +5,12 @@ export default function Header({ ...props }) {
   return (
     <header
       {...props}
-      className={`${props.className} flex self-stretch items-center p-2 bg-white-a700 dark:bg-dark-700 shadow-xs`}
+      className={`flex self-stretch items-center p-1 bg-white-a700 dark:bg-dark-700 shadow-xs`}
     >
       <div className="mx-auto flex w-full ml-2 mr-2 items-center justify-between gap-5 sm:flex-col">
         <span className="bg-white-a700 p-2">
           <Img
-            src="images/img_header_logo.png"
+            src="images/company_logo.png"
             alt="Headerlogo"
             className="h-[40px] w-[112px] object-contain "
           />

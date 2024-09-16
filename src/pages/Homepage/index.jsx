@@ -130,8 +130,9 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="p-4 flex flex-col gap-4 border border-solid border-gray-300_01 dark:border-dark-600 bg-white-a700 dark:bg-dark-700 py-1 h-[42vh]">
-              <div className=" mt-3 flex flex-wrap items-center md:mx-0">
+            <div className="p-4 mt-3 flex flex-col gap-4 border border-solid dark:border-dark-600 bg-white-a700 dark:bg-dark-700 py-1 h-[48vh]">
+              {/* Header Section */}
+              <div className="mt-3 flex flex-wrap items-center">
                 <Heading
                   size="headinglg"
                   as="h3"

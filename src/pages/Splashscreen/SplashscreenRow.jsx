@@ -14,7 +14,7 @@ export default function SplashscreenRow() {
               as="h1"
               className="!text-[30px] !font-normal md:!text-[28px] sm:!text-[26px]"
             >
-              LOGO
+             <img src="images/company_logo.png" alt="" />
             </Heading>
             <Heading
               size="texts"
