@@ -28,7 +28,6 @@ const ProjectRoutes = () => {
     {
       path: "list",
       element: <PlatesList />,
-      //element:<PredefinedList />
     },
   ]);
 
