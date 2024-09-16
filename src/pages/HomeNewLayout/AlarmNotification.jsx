@@ -18,15 +18,16 @@ export const AlarmNotification = () => {
         <h3 className="text-lg font-lato1 dark:text-white-a700">
           Alarms & Notifications
         </h3>
-        <h4 className="ml-1 flex h-[30px] w-[30px] items-center justify-center rounded-[10px] bg-black-900 text-center font-lato1 text-white-a700 dark:bg-white-a700 dark:text-black-900">
+        <Text className="text-gray-400 text-[0.7em] ml-1">
+          (Status: No Alerts Changes to Alert with details of the LPR and Alert
+          Type during violation)
+        </Text>
+        <h4 className="ml-1 flex h-[30px] w-[30px] mr-2 items-center justify-center rounded-[10px] bg-black-900 text-center font-lato1 text-white-a700 dark:bg-white-a700 dark:text-black-900">
           {carData.length &&
             carData.filter((car) => car.AlertLevel !== "None").length}
         </h4>
       </div>
-      <Text className="text-gray-400 text-[0.7em]">
-        Status: No Alerts Changes to Alert with details of the LPR and Alert
-        Type during violation
-      </Text>
+
       {/* Scrollable Content Section */}
       <div className="relative flex-1 h-[10vh] overflow-y-auto  p-2">
         {carData.length > 0 ? (
@@ -37,7 +38,7 @@ export const AlarmNotification = () => {
                   <AlertStrap
                     {...d}
                     key={"homepage" + index}
-                    className="mr-4 md:mr-0 sm:flex-col"
+                    className="mr-4 md:mr-0 sm:flex-col mb-[10px]"
                   />
                 ))}
               </React.Suspense>

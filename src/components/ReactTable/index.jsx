@@ -31,7 +31,7 @@ const ReactTable = ({
   const table = useReactTable(tableConfig);
 
   return (
-    <div className="react-table-container relative h-[20vh] overflow-y-auto">
+    <div className="react-table-container relative h-[30vh] overflow-y-auto">
       <table className={className}>
         <thead {...headerProps}>
           {table.getHeaderGroups().map((headerGroup) => (

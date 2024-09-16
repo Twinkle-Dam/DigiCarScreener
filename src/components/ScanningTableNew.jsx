@@ -222,7 +222,7 @@ export default function ScanningTable() {
           bodyProps={{ className: "max-h-4" }}
           headerProps={{
             className:
-              "border-gray-300_01 border-t border-l border-r border-solid dark:border-dark-600 h-[32px]",
+              "rounded-lg border-gray-300_01 border-t border-l border-r border-solid dark:border-dark-600 h-[32px]",
           }}
           cellProps={{
             className:

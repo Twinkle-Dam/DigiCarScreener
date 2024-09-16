@@ -6,7 +6,7 @@ import { Text } from "components";
 
 export const LastPatrolStrap = ({ latestCaptureData }) => {
   return (
-    <div className="flex flex-col gap-4 justify-evenly">
+    <div className="flex flex-col gap-4 justify-evenly ml-20">
       <LatestPatrolingDetail
         label="Camera ID"
         detail={latestCaptureData?.CameraID}

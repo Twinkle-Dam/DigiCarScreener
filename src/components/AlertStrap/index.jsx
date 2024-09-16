@@ -20,16 +20,9 @@ export default function UserProfile({ ...props }) {
             />
             <div className="absolute right-[9.82px] top-[8.33px] m-auto h-[4px] w-[4px] rounded-sm bg-red-a700" />
           </div>
-          <div className="flex flex-1 flex-col items-start gap-1.5 self-center pr-16">
+          <div className="flex flex-1 items-start gap-1.5 self-center pr-16">
             <Text as="p" className="!font-medium text-blue_gray-900">
-              {`${props.AlertLevel}, ${props.LicensePlate}, ${props.CarMake}/${props.CarModel}, ${props.State}`}
-            </Text>
-            {/* <Text
-              size="textxs"
-              as="p"
-              className="!font-lato1 tracking-[0.13px]"
-            > */}
-            <Text className="text-gray-400 text-[0.7em]">
+              {`${props.AlertLevel}, ${props.LicensePlate}, ${props.CarMake}/${props.CarModel}, ${props.State}`}{" "}
               {`${props.CameraID} | ${formatDate(props.DateTime)}`}
             </Text>
             <div className="absolute bottom-2 right-2 flex justify-between w-40 ">
