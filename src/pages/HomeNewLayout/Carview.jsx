@@ -72,8 +72,13 @@ export const Carview = ({ latestCaptureData }) => {
           >
             Active Patrol
           </Heading>
-          <div className="flex flex-row">
-            {/* CaptureSlider Component on the Left */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2,1fr)",
+              gap: "30px",
+            }}
+          >
             <CaptureSlider dataArray={latestCaptureData.Images} />
             <LastPatrolStrap latestCaptureData={latestCaptureData} />
           </div>
