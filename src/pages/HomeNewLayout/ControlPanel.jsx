@@ -1,55 +1,44 @@
-import { formatDate } from "util/NumberFormatters";
 import React, { useState, useEffect, useRef } from "react";
-import { Text, Heading } from "../../components";
-import { useDispatch, useSelector } from "react-redux";
-import { stopPatrol, startPatrol } from "store";
-import GPSIcon from "components/GPS-top";
-import CaptureSlider from "components/CaptureSlider";
-import { carData } from "MockData/carsData";
+import { Heading } from "../../components";
+import { useSelector } from "react-redux";
 import { AlarmNotification } from "./AlarmNotification";
-import { LiveView } from "./LiveView";
-import { Carview } from "./Carview";
 
 export default function ControlPanel() {
   const [isPatrolStarted, setIsPatrolStarted] = useState(false);
-  const [isPatrolStopped, setIsPatrolStopped] = useState(false); // For stop button
-  const [isAlertActive, setIsAlertActive] = useState(false); // For alert button
-  const [alertColor, setAlertColor] = useState("bg-white-a700"); // Initial button color
+  const [isPatrolStopped, setIsPatrolStopped] = useState(false);
+  const [isAlertActive, setIsAlertActive] = useState(false);
+  const [alertColor, setAlertColor] = useState("bg-white-a700");
+  const audioCtxRef = useRef(null);
+  const beepIntervalRef = useRef(null);
+  const colorIntervalRef = useRef(null);
+  const prevNotificationCountRef = useRef(0); // Ref to keep track of previous count
 
-  const dispatch = useDispatch();
-  const audioCtxRef = useRef(null); // Reference for the audio context
-  const beepIntervalRef = useRef(null); // Reference for the beep interval
-
-  // Mocked counts for alarm and notification (replace with real data)
-  // const alarmCount = 2; // Example count for alarms
-  const notificationCount = 2; // Example count for notifications
+  const alarmCount = useSelector((state) => state.alarmCount);
+  const notificationCount = useSelector((state) => state.notificationCount);
 
   const toggleStartPatrol = () => {
     setIsPatrolStarted(!isPatrolStarted);
-    setIsPatrolStopped(false); // Reset stop
+    setIsPatrolStopped(false);
   };
 
   const toggleStopPatrol = () => {
     setIsPatrolStopped(!isPatrolStopped);
-    setIsPatrolStarted(false); // Reset start
+    setIsPatrolStarted(false);
   };
 
   const toggleAlert = () => {
-    if (!isAlertActive && notificationCount > 1) {
-      // Start alert with toggling and sound only if counts are greater than 1
-      startBeeping();
-      startColorToggle();
-      setIsAlertActive(true);
-    } else if (isAlertActive) {
-      // Stop alert with toggling and sound
+    if (isAlertActive) {
       stopBeeping();
       stopColorToggle();
-      setIsAlertActive(false);
-      setAlertColor("bg-white-a700"); // Reset color
+    } else {
+      if (notificationCount > prevNotificationCountRef.current) {
+        startBeeping();
+        startColorToggle();
+      }
     }
+    setIsAlertActive(!isAlertActive);
   };
 
-  // Function to start the beep sound
   const startBeeping = () => {
     if (!audioCtxRef.current) {
       audioCtxRef.current = new (window.AudioContext ||
@@ -61,21 +50,19 @@ export default function ControlPanel() {
       oscillator.connect(gainNode);
       gainNode.connect(audioCtxRef.current.destination);
 
-      oscillator.frequency.value = 880; // Set frequency for the beep
-      oscillator.type = "square"; // Set waveform type for a distinct sound
-      gainNode.gain.value = 0.7; // Set volume level
+      oscillator.frequency.value = 880;
+      oscillator.type = "square";
+      gainNode.gain.value = 0.7;
 
       oscillator.start();
       setTimeout(() => {
         oscillator.stop();
-      }, 300); // Beep duration (300ms)
+      }, 300);
     };
 
-    // Beep every second
     beepIntervalRef.current = setInterval(startBeep, 1000);
   };
 
-  // Function to stop the beep sound
   const stopBeeping = () => {
     if (beepIntervalRef.current) {
       clearInterval(beepIntervalRef.current);
@@ -83,26 +70,36 @@ export default function ControlPanel() {
     }
   };
 
-  // Function to start the alert button color toggle
   const startColorToggle = () => {
-    setAlertColor("bg-red-500"); // Start with red color
-    beepIntervalRef.current = setInterval(() => {
+    setAlertColor("bg-red-500");
+    const toggleColors = () => {
       setAlertColor((prevColor) =>
         prevColor === "bg-red-500" ? "bg-blue-500" : "bg-red-500"
       );
-    }, 1000); // Toggle every second
+    };
+    colorIntervalRef.current = setInterval(toggleColors, 1000);
   };
 
-  // Function to stop the alert button color toggle
   const stopColorToggle = () => {
-    if (beepIntervalRef.current) {
-      clearInterval(beepIntervalRef.current);
+    if (colorIntervalRef.current) {
+      clearInterval(colorIntervalRef.current);
+      colorIntervalRef.current = null;
     }
   };
 
+  // Effect to handle notification count increase
+  useEffect(() => {
+    if (notificationCount > prevNotificationCountRef.current) {
+      if (!isAlertActive) {
+        startBeeping();
+        startColorToggle();
+      }
+      prevNotificationCountRef.current = notificationCount; // Update previous count
+    }
+  }, [notificationCount]);
+
   useEffect(() => {
     return () => {
-      // Clean up beep and color toggle on unmount
       stopBeeping();
       stopColorToggle();
     };
@@ -135,7 +132,9 @@ export default function ControlPanel() {
               className="h-[24px] w-[24px]"
             />
           ) : (
-            <h2 className="!font-lato1 uppercase tracking-[-0.27px] control-button-text">Start</h2>
+            <h2 className="!font-lato1 uppercase tracking-[-0.27px] control-button-text">
+              Start
+            </h2>
           )}
         </button>
 
@@ -151,7 +150,9 @@ export default function ControlPanel() {
               className="h-[24px] w-[24px]"
             />
           ) : (
-            <h2 className="!font-lato1 uppercase tracking-[-0.27px] control-button-text">Stop</h2>
+            <h2 className="!font-lato1 uppercase tracking-[-0.27px] control-button-text">
+              Stop
+            </h2>
           )}
         </button>
 
@@ -162,12 +163,14 @@ export default function ControlPanel() {
         >
           {isAlertActive ? (
             <img
-              src="images/alert_icon.png" // Use your alert icon path here
+              src="images/alert.png"
               alt="Alert Icon"
               className="h-[24px] w-[24px]"
             />
           ) : (
-            <h2 className="!font-lato1 uppercase tracking-[-0.27px] control-button-text">Alert</h2>
+            <h2 className="!font-lato1 uppercase tracking-[-0.27px] control-button-text">
+              Alert
+            </h2>
           )}
         </button>
       </div>

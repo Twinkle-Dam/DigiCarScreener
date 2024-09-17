@@ -41,29 +41,29 @@ export default function ScanningTable() {
         ),
         meta: { width: "15%" },
       }),
-      // tableColumnHelper.accessor("LicensePlate", {
-      //   cell: (info) => {
-      //     const { LicensePlate, StateName } = info.row.original;
-      //     return (
-      //       <Text className="flex justify-center text-center ">
-      //         {LicensePlate}
-      //         <br />
-      //         {StateName}
-      //         <br />
-      //         {"POS:" + info?.row?.original?.Orientation}
-      //       </Text>
-      //     );
-      //   },
+      tableColumnHelper.accessor("LicensePlate", {
+        cell: (info) => {
+          const { LicensePlate, StateName } = info.row.original;
+          return (
+            <Text className="flex justify-center text-center ">
+              {LicensePlate}
+              <br />
+              {StateName}
+              <br />
+              {"POS:" + info?.row?.original?.Orientation}
+            </Text>
+          );
+        },
 
-      //   header: (info) => (
-      //     <div className="flex">
-      //       <Button className="flex h-[44px] w-fill-available flex-row items-center justify-center border-r border-solid border-gray-300_01 bg-gray-100 px-[7px] text-center text-[16px] font-semibold text-black-900">
-      //         License/State
-      //       </Button>
-      //     </div>
-      //   ),
-      //   meta: { width: "22%" },
-      // }),
+        header: (info) => (
+          <div className="flex">
+            <Button className="flex h-[44px] w-fill-available flex-row items-center justify-center border-r border-solid border-gray-300_01 bg-gray-100 px-[7px] text-center text-[16px] font-semibold text-black-900">
+              License/State
+            </Button>
+          </div>
+        ),
+        meta: { width: "22%" },
+      }),
 
       // Date & Time Column
       tableColumnHelper.accessor("DateTime", {

@@ -5,7 +5,7 @@ export const START_PATROL = "START_PATROL";
 export const STOP_PATROL = "STOP_PATROL";
 // Example of a simple reducer
 const initialState = {
-  carData: [],
+  carData,
 };
 
 const carsReducer = (state = initialState, action) => {
