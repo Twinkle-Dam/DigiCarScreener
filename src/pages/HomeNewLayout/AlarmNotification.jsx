@@ -17,7 +17,7 @@ export const AlarmNotification = () => {
   const [selectedChipOptions, setSelectedChipOptions] = React.useState([1]);
 
   return (
-    <div className="p-4 flex flex-col gap-1 top-1 w-[850px] h-[200px] border border-solid dark:border-dark-600 rounded-lg m-4 bg-white-a700 dark:bg-dark-700 py-2">
+    <div className="p-4 flex flex-col gap-1 top-1 w-[750px] h-[334.08px] border border-solid dark:border-dark-600 rounded-lg  bg-white-a700 dark:bg-dark-700 py-2">
       {/* Header Section */}
       <div className="mt-1 flex justify-between items-center">
         <div className="flex items-center gap-1">

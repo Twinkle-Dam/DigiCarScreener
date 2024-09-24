@@ -1,92 +1,49 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { CAMERA_LIST } from "MockData/carsData";
-import { Heading } from "../../components";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { stopPatrol, startPatrol } from "store";
+import { startPatrol } from "store";
 import CaptureSlider from "components/CaptureSlider";
 import { LastPatrolStrap } from "./LastPatrolStrap";
+import { Heading } from "../../components";
 
 export const Carview = ({ latestCaptureData }) => {
-  const [isPatrolStarted, setIsPatrolStarted] = useState(false);
-  const [carDataFromSocket, setCarDataFromSocket] = useState([]);
   const [ws, setWs] = useState(null);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     const socket = new WebSocket("ws://localhost:3001");
- 
-
+    
     socket.onopen = () => {
       console.log("WebSocket connection established");
     };
 
     socket.onmessage = (event) => {
-      console.log("Message from server:", event.data);
       const incomingData = JSON.parse(event.data);
       dispatch(startPatrol(incomingData));
     };
+
     setWs(socket);
     return () => {
       socket.close();
     };
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   dispatch(startPatrol(carDataFromSocket));
-  // }, [carDataFromSocket]);
+  const carData = useSelector((state) => state.cars.carData);
 
-  const togglePatrol = () => {
-    setIsPatrolStarted(!isPatrolStarted);
-  };
-  const carData = useSelector((state) => {
-    return state.cars.carData;
-  });
-  const newCarData = [...carData];
-  const [chipOptions, setChipOptions] = React.useState(() => CAMERA_LIST);
-  const [selectedChipOptions, setSelectedChipOptions] = React.useState([1]);
-
-  const [isDarkMode, setIsDarkMode] = React.useState(() => {
-    return localStorage.getItem("darkMode") === "true";
-  });
-
-  // Effect to handle class addition/removal
-  React.useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [isDarkMode]);
   return (
-    <>
-    <div className="flex flex-col gap-4 bg-white px-5 items-center heading-bar">
-          <Heading
-            size="headinglg"
-            as="h1"
-            className="!font-lato1 text-black-900 dark:text-white-a700 mt-2"
-          >
-            Active Patrol
-          </Heading></div>
+    <div className="flex flex-col bg-white p-4 rounded-lg shadow-lg">
+      <Heading size="headinglg" as="h1" className="text-black mb-4">
+        Active Patrol
+      </Heading>
       {latestCaptureData ? (
-        <div className="flex flex-col gap-4 bg-white px-5 items-center">
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(2,1fr)",
-              gap: "30px",
-            }}
-          >
-            <CaptureSlider dataArray={latestCaptureData.Images} />
-            <LastPatrolStrap latestCaptureData={latestCaptureData} />
-          </div>
+        <div className="flex flex-col gap-4">
+          <CaptureSlider dataArray={latestCaptureData.Images} />
+          <LastPatrolStrap latestCaptureData={latestCaptureData} />
         </div>
       ) : (
-        <div className="flex h-[20vh] items-center justify-center dark:text-white-a700">
+        <div className="flex h-[20vh] items-center justify-center text-black">
           No data Captured! Start Patrolling.
         </div>
       )}
-    </>
+    </div>
   );
 };

@@ -6,7 +6,7 @@ export default function CaptureSlider({ dataArray }) {
   const sliderRef = React.useRef(null);
 
   return (
-    <div className="w-[700px]  md:self-stretch">
+    <div className="relative w-full md:self-stretch" style={{ maxWidth: '300px' }}>
       <Slider
         responsive={{
           0: { items: 1 },
@@ -21,19 +21,24 @@ export default function CaptureSlider({ dataArray }) {
         ref={sliderRef}
         items={dataArray.map((carImage, index) => {
           return (
-            <img
-              src={carImage}
-              alt=""
-              style={{
-                width: "90%",
-                height: "200px",
-                objectFit: "cover",
-                margin: "auto",
-              }}
-            />
+            <div className="flex justify-center items-center">
+              <img
+                src={carImage}
+                alt=""
+                style={{
+                  width: "100%",
+                  height: "auto", 
+                  maxHeight: "200px", 
+                  objectFit: "cover",
+                }}
+              />
+            </div>
           );
         })}
       />
-    </div>
+    
+      
+      </div>
+    
   );
 }

@@ -32,6 +32,7 @@ const Switch = ({
         checkedIcon={checkedIcon}
         uncheckedIcon={uncheckedIcon}
       />
+      
     </div>
   );
 };

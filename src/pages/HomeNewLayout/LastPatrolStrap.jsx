@@ -6,7 +6,7 @@ import { Text } from "components";
 
 export const LastPatrolStrap = ({ latestCaptureData }) => {
   return (
-    <div className="flex flex-col gap-4 justify-evenly ml-20">
+    <div className="flex flex-col gap-4  ">
       <LatestPatrolingDetail
         label="Camera ID"
         detail={latestCaptureData?.CameraID}
@@ -19,9 +19,8 @@ export const LastPatrolStrap = ({ latestCaptureData }) => {
             : "--"
         }
       />
-
       <LatestPatrolingDetail
-        label=" Make/Model/Color"
+        label="Make/Model/Color"
         detail={
           latestCaptureData?.CarModel &&
           latestCaptureData?.CarMake &&
@@ -34,8 +33,8 @@ export const LastPatrolStrap = ({ latestCaptureData }) => {
         label="Date & Time/GPS"
         detail={
           latestCaptureData ? (
-            <div className="flex items-center gap-2">
-              <Text className="text-black-900 dark:text-white-a700  whitespace-nowrap">
+            <div className="flex items-start gap-2">
+              <Text className="text-black-900 dark:text-white-a700 whitespace-nowrap">
                 {formatDate(latestCaptureData?.DateTime)}
               </Text>
               <GPSIcon />

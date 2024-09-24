@@ -6,15 +6,15 @@ import { updateNotificationCount } from "notificationReducer";
 import ScanningTable from "../../components/ScanningTableNew";
 import { Carview } from "./Carview";
 
-export default function ControlPanel() {
+export default function ControlPanel({ carData }) {
   const dispatch = useDispatch();
-
   const [isPatrolStarted, setIsPatrolStarted] = useState(false);
   const [isAlertActive, setIsAlertActive] = useState(false);
   const [alertColor, setAlertColor] = useState("bg-white-a700");
   const [isStartButtonEnabled, setIsStartButtonEnabled] = useState(true);
   const [isStopButtonEnabled, setIsStopButtonEnabled] = useState(false);
   const [isAlertButtonEnabled, setIsAlertButtonEnabled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for menu visibility
 
   const audioCtxRef = useRef(null);
   const beepIntervalRef = useRef(null);
@@ -29,11 +29,9 @@ export default function ControlPanel() {
     setIsPatrolStarted(true);
     setIsStartButtonEnabled(false);
     setIsStopButtonEnabled(true);
-
     setTimeout(() => {
       dispatch(updateNotificationCount());
     }, 5000);
-
     timeoutRef.current = setTimeout(() => {
       setIsAlertButtonEnabled(true);
       startBeeping();
@@ -112,6 +110,11 @@ export default function ControlPanel() {
     setIsAlertButtonEnabled(false);
   };
 
+  // Toggle menu visibility
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
   // Cleanup on component unmount
   useEffect(() => {
     return () => {
@@ -123,81 +126,114 @@ export default function ControlPanel() {
   }, []);
 
   return (
-    <div className="rounded-lg">
-      {/* Main content area */}
-      <div className="flex">
-        {/* Sidebar - Enforcement Tab */}
-        <div className="flex flex-col items-center bg-gray-200 dark:bg-slate-800 p-4 border-r border-gray-300 text-dark-700 dark:text-white-700">
-          <Heading size="headinglg" as="h1" className="text-black">
-            Enforcement Tab
-          </Heading>
-          <div className="mt-6 space-y-4">
-            {/* Start Button */}
-            <div className="flex flex-col items-center">
-              <button
-                onClick={toggleStartPatrol}
-                disabled={!isStartButtonEnabled}
-                className={`p-4 w-[80px] h-[80px] bg-green-500 text-white rounded-full shadow-lg transition-transform ${
-                  !isStartButtonEnabled ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-              >
-                Start 
-              </button>
-              <p className="mt-2 text-black">Start Patrol</p>
-            </div>
+    <div className="w-full h-full rounded-lg p-4 flex">
+      {/* Sidebar - Enforcement Tab */}
+      <div className="flex flex-col items-center rounded-lg border dark:bg-slate-800 p-4 border-r border-gray-300 text-dark-700 dark:text-white-700 w-1/6 transition-transform transform hover:scale-105 shadow-lg">
+        <img src="images/logoo.png" alt="Logo" className="mb-4" />
 
-            {/* Stop Button */}
-            <div className="flex flex-col items-center">
-              <button
-                onClick={toggleStopPatrol}
-                disabled={!isStopButtonEnabled}
-                className={`p-4 w-[80px] h-[80px] bg-red-500 text-white rounded-full shadow-lg transition-transform ${
-                  !isStopButtonEnabled ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-              >
-                Stop 
-              </button>
-              <p className="mt-2 text-black">Stop Patrol</p>
-            </div>
+        <Heading size="headinglg" as="h1" className="text-black">
+          Enforcement Tab
+        </Heading>
+        <div className="mt-6 space-y-4">
+          {/* Start Button */}
+          <div className="flex flex-col items-center">
+            <button
+              onClick={toggleStartPatrol}
+              disabled={!isStartButtonEnabled}
+              className={`p-4 w-[80px] h-[80px] bg-green-500 text-white rounded-full shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-105 ${
+                !isStartButtonEnabled ? "opacity-50 cursor-not-allowed" : "hover:shadow-2xl active:scale-95"
+              }`}
+            >
+              Start
+            </button>
+            <p className="mt-2 text-black">Start Patrol</p>
+          </div>
 
-            {/* Alert Button with Outer Circle */}
-            <div className="relative flex flex-col items-center">
-              {isAlertActive && (
-                <div className={`absolute rounded-full border border-black ${isAlertActive ? 'border-yellow-600' : 'border-transparent'} h-[90px] w-[90px]`} style={{ zIndex: -1 }} />
+          {/* Stop Button */}
+          <div className="flex flex-col items-center">
+            <button
+              onClick={toggleStopPatrol}
+              disabled={!isStopButtonEnabled}
+              className={`p-4 w-[80px] h-[80px] bg-red-500 text-white rounded-full shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-105 ${
+                !isStopButtonEnabled ? "opacity-50 cursor-not-allowed" : "hover:shadow-2xl active:scale-95"
+              }`}
+            >
+              Stop
+            </button>
+            <p className="mt-2 text-black">Stop Patrol</p>
+          </div>
+
+          {/* Alert Button */}
+          <div className="relative flex flex-col items-center">
+            {isAlertActive && (
+              <div
+                className={`absolute rounded-full border border-black ${
+                  isAlertActive ? "border-yellow-600" : "border-transparent"
+                } h-[90px] w-[90px]`}
+                style={{ zIndex: -1 }}
+              />
+            )}
+            <button
+              onClick={handleAlertButtonClick}
+              disabled={!isAlertButtonEnabled}
+              className={`p-4 w-[80px] h-[80px] ${
+                isAlertActive ? "bg-yellow-600" : "bg-yellow-300"
+              } text-white rounded-full shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-105 ${
+                !isAlertButtonEnabled ? "opacity-50 cursor-not-allowed" : "hover:shadow-3xl active:scale-95"
+              }`}
+            >
+              {isAlertActive ? (
+                <img
+                  src="images/img_alertyellow.png"
+                  alt="Alert"
+                  className="w-1/2 h-1/2 mx-auto"
+                />
+              ) : (
+                <h2 className="text-xs font-bold">Alert</h2>
               )}
-              <button
-                onClick={handleAlertButtonClick}
-                disabled={!isAlertButtonEnabled}
-                className={`p-4 w-[80px] h-[80px] ${isAlertActive ? 'bg-yellow-600' : 'bg-yellow-300'} text-white rounded-full shadow-lg transition-transform ${
-                  !isAlertButtonEnabled ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-              >
-                {isAlertActive ? (
-                  <img src="images/img_alertyellow.png" alt="Alert" className="w-1/2 h-1/2 mx-auto" />
-                ) : (
-                  <h2 className="text-xs font-bold">Alert</h2>
-                )}
-              </button>
-              <p className="mt-2 text-black">New Alert</p>
-            </div>
+            </button>
+            <p className="mt-2 text-black">New Alert</p>
+          </div>
+
+          {/* Menu Button */}
+          <div className="flex flex-col items-center relative">
+            <button
+              onClick={toggleMenu}
+              className="mt-4 p-4 w-[80px] h-[80px] text-black"
+            >
+              <img src="images/menuItem.png" alt="Menu" className="w-1/2 h-1/2 mx-auto" />
+            </button>
+            {isMenuOpen && (
+              <div className="absolute right-[-180px] top-[-50px] bg-transparent shadow-lg rounded-md mt-2 p-2 z-10 w-48">
+                <ul className="space-y-1 bg-pink-100">
+                  <li className="border-b py-1">Chatbot</li>
+                  <li className="border-b py-1">Dark Theme</li>
+                  <li className="border-b py-1">Profile</li>
+                  <li className="border-b py-1">Settings</li>
+                  <li className="py-1">Logout</li>
+                </ul>
+              </div>
+            )}
           </div>
         </div>
+      </div>
 
-        {/* Main content */}
-        <div className="flex flex-col w-[100%] p-4">
-          <div className="flex justify-between space-x-4 w-full ">
-            <div className="flex flex-col bg-gray-300 p-4 rounded-lg" style={{ flex: 2, height: "200px" }}>
-              <Carview />
-            </div>
+      {/* Main content */}
+      <div className="flex flex-col w-full p-4">
+        <div className="flex justify-between space-x-4 w-1/2">
+          <div className="flex flex-col rounded-lg w-3/5 transition-transform transform hover:scale-105 shadow-lg">
+            <Carview latestCaptureData={carData} />
+          </div>
+          <div className="flex flex-col rounded-lg w-2/5 transition-transform transform hover:scale-105 shadow-lg">
             <AlarmNotification />
           </div>
-
-          {/* Patrol History with overflow handling */}
-          <Heading size="headinglg" as="h1" className="text-black">
-            Patrol History
-          </Heading>
-          <ScanningTable />
         </div>
+
+        {/* Patrol History with overflow handling */}
+        <Heading size="headinglg" as="h1" className="text-black mt-4">
+          Patrol History
+        </Heading>
+        <ScanningTable />
       </div>
     </div>
   );

@@ -41,7 +41,7 @@ export default function Home() {
       </Helmet>
       <div className="flex w-full flex-col items-center gap-1 bg-blue_gray-50 dark:bg-black-900">
         {/* Ensure the background color is also set for dark mode */}
-        <Header />
+        {/* <Header /> */}
         {/* Add Switch for Dark Mode */}
         {/* <div className="flex w-full justify-end p-4">
           <Switch value={isDarkMode} onChange={handleDarkModeToggle} />

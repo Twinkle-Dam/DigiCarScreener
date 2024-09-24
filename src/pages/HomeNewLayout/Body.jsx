@@ -1,6 +1,6 @@
 import React from "react";
 import ScanningTableNew from "../../components/ScanningTableNew";
-import { ChatBox } from "./ChatBox";
+
 import { Carview } from "./Carview";
 import ControlPanel from "./ControlPanel";
 
