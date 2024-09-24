@@ -1,15 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { carData } from "MockData/carsData";
-
+import notificationReducer from "notificationReducer";
 export const START_PATROL = "START_PATROL";
 export const STOP_PATROL = "STOP_PATROL";
-// Example of a simple reducer
+export const UPDATE_NOTIFICATION_COUNT = "UPDATE_NOTIFICATION_COUNT";
+
+
 const initialState = {
   carData,
 };
 
 const carsReducer = (state = initialState, action) => {
-  console.log("action", action);
   const preList = JSON.parse(localStorage.getItem("licensePlates"));
 
   switch (action.type) {
@@ -24,12 +25,17 @@ const carsReducer = (state = initialState, action) => {
         ...state,
         //carData:state.carData,
         //carData: [...state.carData, action.payload],
-        carData: [action.payload, ...state.carData],
+        //  carData: [action.payload, ...state.carData],
+        carData: [
+          { ...action.payload, AlertLevel: alertLevel },
+          ...state.carData,
+        ],
       };
     case STOP_PATROL:
       return {
         ...state,
         carData: [],
+        notificationCount: 0,
       };
     default:
       return state;
@@ -40,6 +46,7 @@ const carsReducer = (state = initialState, action) => {
 const store = configureStore({
   reducer: {
     cars: carsReducer,
+    notifications: notificationReducer
   },
 });
 
@@ -52,4 +59,8 @@ export const startPatrol = (payload) => ({
 
 export const stopPatrol = () => ({
   type: STOP_PATROL,
+});
+
+export const UpdateNotificationCount = () => ({
+  type: UPDATE_NOTIFICATION_COUNT,
 });

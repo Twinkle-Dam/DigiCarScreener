@@ -1,68 +1,80 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Heading } from "../../components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { AlarmNotification } from "./AlarmNotification";
+import { updateNotificationCount } from "notificationReducer";
+import ScanningTable from "../../components/ScanningTableNew";
+import { Carview } from "./Carview";
 
 export default function ControlPanel() {
+  const dispatch = useDispatch();
+
   const [isPatrolStarted, setIsPatrolStarted] = useState(false);
-  const [isPatrolStopped, setIsPatrolStopped] = useState(false);
   const [isAlertActive, setIsAlertActive] = useState(false);
   const [alertColor, setAlertColor] = useState("bg-white-a700");
+  const [isStartButtonEnabled, setIsStartButtonEnabled] = useState(true);
+  const [isStopButtonEnabled, setIsStopButtonEnabled] = useState(false);
+  const [isAlertButtonEnabled, setIsAlertButtonEnabled] = useState(false);
+
   const audioCtxRef = useRef(null);
   const beepIntervalRef = useRef(null);
   const colorIntervalRef = useRef(null);
-  const prevNotificationCountRef = useRef(0); // Ref to keep track of previous count
+  const timeoutRef = useRef(null);
+  const notificationTimerRef = useRef(null);
 
-  const alarmCount = useSelector((state) => state.alarmCount);
-  const notificationCount = useSelector((state) => state.notificationCount);
+  const notificationCount = useSelector((state) => state.cars.carData);
 
+  // Start patrol logic
   const toggleStartPatrol = () => {
-    setIsPatrolStarted(!isPatrolStarted);
-    setIsPatrolStopped(false);
+    setIsPatrolStarted(true);
+    setIsStartButtonEnabled(false);
+    setIsStopButtonEnabled(true);
+
+    setTimeout(() => {
+      dispatch(updateNotificationCount());
+    }, 5000);
+
+    timeoutRef.current = setTimeout(() => {
+      setIsAlertButtonEnabled(true);
+      startBeeping();
+      startColorToggle();
+      setIsAlertActive(true);
+    }, 6000);
   };
 
+  // Stop patrol logic
   const toggleStopPatrol = () => {
-    setIsPatrolStopped(!isPatrolStopped);
-    setIsPatrolStarted(false);
+    setIsStartButtonEnabled(true);
+    setIsStopButtonEnabled(false);
+    setIsAlertButtonEnabled(false);
+    stopBeeping();
+    stopColorToggle();
+    clearTimeout(timeoutRef.current);
+    clearTimeout(notificationTimerRef.current);
   };
 
-  const toggleAlert = () => {
-    if (isAlertActive) {
-      stopBeeping();
-      stopColorToggle();
-    } else {
-      if (notificationCount > prevNotificationCountRef.current) {
-        startBeeping();
-        startColorToggle();
-      }
-    }
-    setIsAlertActive(!isAlertActive);
-  };
-
+  // Start beeping sound when alert is active
   const startBeeping = () => {
     if (!audioCtxRef.current) {
-      audioCtxRef.current = new (window.AudioContext ||
-        window.webkitAudioContext)();
+      audioCtxRef.current = new (window.AudioContext || window.webkitAudioContext)();
     }
     const startBeep = () => {
       const oscillator = audioCtxRef.current.createOscillator();
       const gainNode = audioCtxRef.current.createGain();
       oscillator.connect(gainNode);
       gainNode.connect(audioCtxRef.current.destination);
-
       oscillator.frequency.value = 880;
       oscillator.type = "square";
       gainNode.gain.value = 0.7;
-
       oscillator.start();
       setTimeout(() => {
         oscillator.stop();
       }, 300);
     };
-
     beepIntervalRef.current = setInterval(startBeep, 1000);
   };
 
+  // Stop beeping sound
   const stopBeeping = () => {
     if (beepIntervalRef.current) {
       clearInterval(beepIntervalRef.current);
@@ -70,111 +82,123 @@ export default function ControlPanel() {
     }
   };
 
+  // Start color toggle
   const startColorToggle = () => {
     setAlertColor("bg-red-500");
     const toggleColors = () => {
       setAlertColor((prevColor) =>
-        prevColor === "bg-red-500" ? "bg-blue-500" : "bg-red-500"
+        prevColor === "bg-red-500" ? "bg-yellow-600" : "bg-red-500"
       );
     };
     colorIntervalRef.current = setInterval(toggleColors, 1000);
   };
 
+  // Stop color toggle
   const stopColorToggle = () => {
     if (colorIntervalRef.current) {
       clearInterval(colorIntervalRef.current);
       colorIntervalRef.current = null;
+      setAlertColor("bg-white-a700");
     }
   };
 
-  // Effect to handle notification count increase
-  useEffect(() => {
-    if (notificationCount > prevNotificationCountRef.current) {
-      if (!isAlertActive) {
-        startBeeping();
-        startColorToggle();
-      }
-      prevNotificationCountRef.current = notificationCount; // Update previous count
+  // Handle alert button click
+  const handleAlertButtonClick = () => {
+    if (isAlertActive) {
+      stopBeeping();
+      stopColorToggle();
+      setIsAlertActive(false);
     }
-  }, [notificationCount]);
+    setIsAlertButtonEnabled(false);
+  };
 
+  // Cleanup on component unmount
   useEffect(() => {
     return () => {
       stopBeeping();
       stopColorToggle();
+      clearTimeout(timeoutRef.current);
+      clearTimeout(notificationTimerRef.current);
     };
   }, []);
 
   return (
-    <>
-      {/* Centered Heading */}
-      <div className="flex flex-col items-center heading-bar">
-        <Heading
-          size="headinglg"
-          as="h1"
-          className="!font-lato1 text-black-900 dark:text-white-a700 mt-2"
-        >
-          Enforcement Tab
-        </Heading>
+    <div className="rounded-lg">
+      {/* Main content area */}
+      <div className="flex">
+        {/* Sidebar - Enforcement Tab */}
+        <div className="flex flex-col items-center bg-gray-200 dark:bg-slate-800 p-4 border-r border-gray-300 text-dark-700 dark:text-white-700">
+          <Heading size="headinglg" as="h1" className="text-black">
+            Enforcement Tab
+          </Heading>
+          <div className="mt-6 space-y-4">
+            {/* Start Button */}
+            <div className="flex flex-col items-center">
+              <button
+                onClick={toggleStartPatrol}
+                disabled={!isStartButtonEnabled}
+                className={`p-4 w-[80px] h-[80px] bg-green-500 text-white rounded-full shadow-lg transition-transform ${
+                  !isStartButtonEnabled ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+              >
+                Start 
+              </button>
+              <p className="mt-2 text-black">Start Patrol</p>
+            </div>
+
+            {/* Stop Button */}
+            <div className="flex flex-col items-center">
+              <button
+                onClick={toggleStopPatrol}
+                disabled={!isStopButtonEnabled}
+                className={`p-4 w-[80px] h-[80px] bg-red-500 text-white rounded-full shadow-lg transition-transform ${
+                  !isStopButtonEnabled ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+              >
+                Stop 
+              </button>
+              <p className="mt-2 text-black">Stop Patrol</p>
+            </div>
+
+            {/* Alert Button with Outer Circle */}
+            <div className="relative flex flex-col items-center">
+              {isAlertActive && (
+                <div className={`absolute rounded-full border border-black ${isAlertActive ? 'border-yellow-600' : 'border-transparent'} h-[90px] w-[90px]`} style={{ zIndex: -1 }} />
+              )}
+              <button
+                onClick={handleAlertButtonClick}
+                disabled={!isAlertButtonEnabled}
+                className={`p-4 w-[80px] h-[80px] ${isAlertActive ? 'bg-yellow-600' : 'bg-yellow-300'} text-white rounded-full shadow-lg transition-transform ${
+                  !isAlertButtonEnabled ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+              >
+                {isAlertActive ? (
+                  <img src="images/img_alertyellow.png" alt="Alert" className="w-1/2 h-1/2 mx-auto" />
+                ) : (
+                  <h2 className="text-xs font-bold">Alert</h2>
+                )}
+              </button>
+              <p className="mt-2 text-black">New Alert</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Main content */}
+        <div className="flex flex-col w-[100%] p-4">
+          <div className="flex justify-between space-x-4 w-full ">
+            <div className="flex flex-col bg-gray-300 p-4 rounded-lg" style={{ flex: 2, height: "200px" }}>
+              <Carview />
+            </div>
+            <AlarmNotification />
+          </div>
+
+          {/* Patrol History with overflow handling */}
+          <Heading size="headinglg" as="h1" className="text-black">
+            Patrol History
+          </Heading>
+          <ScanningTable />
+        </div>
       </div>
-
-      {/* Button Section */}
-      <div className="flex items-center justify-evenly gap-10">
-        {/* Start Button */}
-        <button
-          onClick={toggleStartPatrol}
-          className="flex items-center justify-center border border-solid border-black-900 p-4 w-[100px] h-[100px] dark:border-dark-600 bg-white-a700 rounded-full"
-        >
-          {isPatrolStarted ? (
-            <img
-              src="images/play.png"
-              alt="Start Icon"
-              className="h-[24px] w-[24px]"
-            />
-          ) : (
-            <h2 className="!font-lato1 uppercase tracking-[-0.27px] control-button-text">
-              Start
-            </h2>
-          )}
-        </button>
-
-        {/* Stop Button */}
-        <button
-          onClick={toggleStopPatrol}
-          className="flex items-center justify-center border border-solid border-black-900 p-4 w-[100px] h-[100px] dark:border-dark-600 bg-white-a700 rounded-full"
-        >
-          {isPatrolStopped ? (
-            <img
-              src="images/img_icon_pause.svg"
-              alt="Stop Icon"
-              className="h-[24px] w-[24px]"
-            />
-          ) : (
-            <h2 className="!font-lato1 uppercase tracking-[-0.27px] control-button-text">
-              Stop
-            </h2>
-          )}
-        </button>
-
-        {/* Alert Button */}
-        <button
-          onClick={toggleAlert}
-          className={`flex items-center justify-center border border-solid border-black-900 p-4 w-[100px] h-[100px] dark:border-dark-600 ${alertColor} rounded-full`} // Dynamic color
-        >
-          {isAlertActive ? (
-            <img
-              src="images/alert.png"
-              alt="Alert Icon"
-              className="h-[24px] w-[24px]"
-            />
-          ) : (
-            <h2 className="!font-lato1 uppercase tracking-[-0.27px] control-button-text">
-              Alert
-            </h2>
-          )}
-        </button>
-      </div>
-      <AlarmNotification />
-    </>
+    </div>
   );
 }

@@ -1,13 +1,10 @@
 import React from "react";
-import { formatDate } from "util/NumberFormatters";
 import { useState, useEffect } from "react";
 import { CAMERA_LIST } from "MockData/carsData";
-import { Text, Heading } from "../../components";
+import { Heading } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { stopPatrol, startPatrol } from "store";
-import GPSIcon from "components/GPS-top";
 import CaptureSlider from "components/CaptureSlider";
-import { LatestPatrolingDetail } from "./LatestPatrolingDetail";
 import { LastPatrolStrap } from "./LastPatrolStrap";
 
 export const Carview = ({ latestCaptureData }) => {
@@ -19,6 +16,7 @@ export const Carview = ({ latestCaptureData }) => {
 
   useEffect(() => {
     const socket = new WebSocket("ws://localhost:3001");
+ 
 
     socket.onopen = () => {
       console.log("WebSocket connection established");
