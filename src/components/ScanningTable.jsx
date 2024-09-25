@@ -34,7 +34,7 @@ export default function ScanningTable() {
           </div>
         ),
         header: (info) => (
-          <div className="flex h-full">
+          <div className="flex">
             <Heading
               as="h4"
               className="flex justify-center items-center font-bold border-r w-fill-available border-solid border-gray-300_01 bg-gray-100 pl-2.5 pr-1"

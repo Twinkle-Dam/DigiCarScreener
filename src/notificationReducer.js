@@ -9,7 +9,7 @@ const initialNotificationState = {
 
 // Reducer for notification count
 const notificationReducer = (state = initialNotificationState, action) => {
-  console.log(state,"heloo------------------ I AM R{URGNAERGKERNGKERNGNKERKN")
+  // console.log(state,"heloo------------------ I AM R{URGNAERGKERNGKERNGNKERKN")
   switch (action.type) {
     case UPDATE_NOTIFICATION_COUNT:
       return {

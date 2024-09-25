@@ -1,7 +1,4 @@
 import React from "react";
-import ScanningTableNew from "../../components/ScanningTableNew";
-
-import { Carview } from "./Carview";
 import ControlPanel from "./ControlPanel";
 
 export const Body = ({ newCarData }) => {

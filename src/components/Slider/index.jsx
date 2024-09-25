@@ -7,7 +7,7 @@ const CustomPrevButton = ({ onClick }) => (
     onClick={onClick}
     className="absolute top-1/2 left-0 transform -translate-y-1/2 text-white z-10"
   >
-    <img src="images/arrow-left.svg" />
+    <img src="images/Leftarrow.svg" />
   </button>
 );
 
@@ -16,7 +16,7 @@ const CustomNextButton = ({ onClick }) => (
     onClick={onClick}
     className="absolute top-1/2 right-0 transform -translate-y-1/2 text-white  z-10"
   >
-    <img src="images/arrow-right.svg" />
+    <img src="images/Rightarrow.svg" />
   </button>
 );
 const Slider = React.forwardRef(

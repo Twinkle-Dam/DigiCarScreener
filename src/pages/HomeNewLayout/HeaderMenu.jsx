@@ -1,7 +1,11 @@
-import React from 'react'
+import React from 'react';
+import { ChatBox } from './ChatBox'; 
 
 export default function HeaderMenu() {
   return (
-<div>my name</div>
-  )
+    <div>
+      
+      <ChatBox />
+    </div>
+  );
 }
