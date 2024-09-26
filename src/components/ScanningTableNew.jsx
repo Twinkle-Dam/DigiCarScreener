@@ -1,8 +1,7 @@
-import { Text, Img,  Heading } from ".";
+import { Text, Img, Heading } from ".";
 import React from "react";
 import { formatDate, formatGPSLocation } from "util/NumberFormatters";
 import { useSelector } from "react-redux";
-
 
 const STRAP_ARRAY = [
   { label: 'License Plate', dataColumn: 'LicensePlate' },
@@ -19,11 +18,11 @@ export default function ScanningTable() {
 
   return (
     <div className="w-full h-full">
-      <div className="flex flex-col gap-2 bg-white-a700 dark:bg-dark-700 md:flex-col overflow-y-auto max-h-[200px]">
+      <div className="flex flex-col gap-2 mt-4 bg-white-a700 dark:bg-dark-700 md:flex-col overflow-y-auto max-h-[250px]">
         {carData.map((car, index) => (
           <div key={index} className="flex items-start border border-gray-300 dark:border-dark-600 rounded-lg p-2">
             {/* Display the image first */}
-            <div className="flex-shrink-0 mr-2">
+            <div className="flex-shrink-0 mr-1">
               <Img
                 src={car.Images[0]} 
                 alt={`Car Image`}
@@ -40,12 +39,12 @@ export default function ScanningTable() {
                   {formatDate(car.DateTime) || '--'}
                 </Text>
               </div>
-              {/* Render other data columns with headings */}
+              {/* Render other data columns with even distribution */}
               <div className="flex flex-row justify-between">
                 {STRAP_ARRAY.map(({ label, dataColumn }) => (
-                  <div key={dataColumn} >
-                    <Heading as="h6" className="text-gray-500 dark:text-gray-400">{label}</Heading>
-                    <Text className="text-black-900 dark:text-white-a700">
+                  <div key={dataColumn} className="flex flex-col items-start flex-grow"> 
+                    <Heading as="h5" className="text-gray-500 dark:text-gray-400 text-center">{label}</Heading>
+                    <Text className="text-black-900 dark:text-white-a700  text-center truncate">
                       {dataColumn === "GPSLocation" ? formatGPSLocation(car[dataColumn]) : 
                        car[dataColumn] || '--'}
                     </Text>

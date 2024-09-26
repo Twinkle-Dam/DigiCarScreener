@@ -53,7 +53,7 @@ export default function ControlPanel({ carData }) {
     stopBeeping();
     stopColorToggle();
     clearTimeout(timeoutRef.current);
-    setIsAlertActive(false); // Reset alert state
+    setIsAlertActive(false);
   };
 
   const startBeeping = () => {
@@ -123,68 +123,81 @@ export default function ControlPanel({ carData }) {
   }, []);
 
   return (
-    <div className="flex w-full h-screen">
+    <div className="flex w-full h-screen md:flex-wrap">
       {/* Sidebar - Enforcement Tab */}
-      <div className="flex flex-col items-center rounded-lg border dark:bg-slate-800 p-4 border-r border-gray-300 text-dark-700 dark:text-white-700 w-[10%] h-full shadow-lg">
+      <div className="rounded-lg border dark:bg-slate-800 p-4 border-r border-gray-300 w-[10%] h-full shadow-lg md:w-1/2">
         <img src="images/logoo.png" alt="Logo" className="mb-4" />
-        
-        <div className="mt-20 space-y-4">
+
+        <div className="mt-8 space-y-4">
           {/* Start Button */}
           <div className="flex flex-col items-center">
-            <button
-              onClick={toggleStartPatrol}
-              disabled={!isStartButtonEnabled}
-              className={`p-4 w-[80px] h-[80px] border-2 border-gray-500 rounded-full shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-105 ${
-                isPatrolStarted
-                  ? "bg-[linear-gradient(180deg,_#FFAF2F_14.87%,_#9C6712_87.03%)]"
-                  : "bg-[linear-gradient(180deg,_#1BD961_14.87%,_#024937_87.03%)]"
-              } outline outline-[0.95px] outline-[rgba(222,222,222,1)`}
+            <div
+              className={`mb-1 rounded-full transition-all duration-300 ease-in-out ${
+                isAlertActive ? 'border-4' : 'border-4 border-[rgba(222,222,222,0.5)]'
+              } w-[91px] h-[91px] flex items-center justify-center`}
             >
-              {isPatrolStarted ? "Pause" : "Start"}
-            </button>
+              <button
+                onClick={toggleStartPatrol}
+                disabled={!isStartButtonEnabled}
+                className={`p-4 w-[80px] h-[80px] border-2 border-gray-500 rounded-full shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-105 ${
+                  isPatrolStarted
+                    ? "bg-[linear-gradient(180deg,_#FFAF2F_14.87%,_#9C6712_87.03%)]"
+                    : "bg-[linear-gradient(180deg,_#1BD961_14.87%,_#024937_87.03%)]"
+                }`}
+              >
+                {isPatrolStarted ? "Pause" : "Start"}
+              </button>
+            </div>
             <p className="mt-2 text-black">Start Patrol</p>
           </div>
 
           {/* Stop Button */}
           <div className="flex flex-col items-center">
-            <button
-              onClick={toggleStopPatrol}
-              disabled={!isStopButtonEnabled}
-              className={`p-4 w-[80px] h-[80px] border-2 border-gray-500 rounded-full shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-105 ${
-                isPatrolStarted
-                  ? "bg-[linear-gradient(360deg,_#FF0000_0%,_#811325_100%)]"
-                  : "bg-[linear-gradient(360deg,_#EEEEEE_0%,_#B4B4B4_100%)]"
-              } outline outline-[0.95px] outline-[rgba(222,222,222,1)`}
+            <div
+              className={`mb-1 rounded-full transition-all duration-300 ease-in-out ${
+                isAlertActive ? 'border-4' : 'border-4 border-[rgba(222,222,222,0.5)]'
+              } w-[91px] h-[91px] flex items-center justify-center`}
             >
-              Stop
-            </button>
+              <button
+                onClick={toggleStopPatrol}
+                disabled={!isStopButtonEnabled}
+                className={`p-4 w-[80px] h-[80px] border-2 border-gray-500 rounded-full shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-105 ${
+                  isPatrolStarted
+                    ? "bg-[linear-gradient(360deg,_#FF0000_0%,_#811325_100%)]"
+                    : "bg-[linear-gradient(360deg,_#EEEEEE_0%,_#B4B4B4_100%)]"
+                }`}
+              >
+                Stop
+              </button>
+            </div>
             <p className="mt-2 text-black">Stop Patrol</p>
           </div>
 
           {/* Alert Button */}
-      {/* Alert Button */}
-        <div className="relative flex flex-col items-center">
-          <button
-          onClick={handleAlertButtonClick}
-          disabled={!isAlertButtonEnabled}
-          className={`p-4 w-[80px] h-[80px] border-2 rounded-full shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-105 ${
-          isAlertActive
-          ? "bg-[linear-gradient(180deg,_#D6AB00_0%,_#FFEE7D_100%)] outline outline-[0.95px] outline-red-500"
-          : "bg-[linear-gradient(180deg,_#D6AB00_0%,_#FFEE7D_100%)] outline outline-[0.95px] outline-[rgba(222,222,222,0.5)]"
-        }`}
-        >
-        
-        <img
-          src="images/AlertIcon.svg" 
-          alt="Alert"
-          className="w-2/3 h-2/3 mx-auto"
-        />
-      
-     
-      </button>
-      <p className="mt text-black">New Alert</p>
-    </div>
-
+          <div className="flex flex-col items-center">
+            <div
+              className={`mb-1 rounded-full transition-all duration-300 ease-in-out ${
+                isAlertActive ? 'border-4 border-red-500' : 'border-4 border-[rgba(222,222,222,0.5)]'
+              } w-[91px] h-[91px] flex items-center justify-center`}
+            >
+              <button
+                onClick={handleAlertButtonClick}
+                disabled={!isAlertButtonEnabled}
+                className={`p-2 w-[80px] h-[80px] border-2 rounded-full shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-105 ${
+                  isAlertActive
+                    ? "bg-[linear-gradient(180deg,_#D6AB00_0%,_#FFEE7D_100%)]"
+                    : "bg-[linear-gradient(180deg,_#D6AB00_0%,_#FFEE7D_100%)]"
+                }`}
+              >
+                <img
+                  src="images/AlertIcon.svg" 
+                  alt="Alert"
+                  className="w-2/3 h-2/3 mx-auto"
+                />
+              </button>
+            </div>
+            <p className="mt text-black">Notifications</p>
+          </div>
 
           {/* Menu Button */}
           <div className="flex flex-col items-center relative">
@@ -195,9 +208,28 @@ export default function ControlPanel({ carData }) {
               <img src="images/MenuIcon.svg" alt="Menu" className="w-1/2 h-1/2 mx-auto" />
             </button>
             {isMenuOpen && (
-              <div className="absolute right-[-180px] top-[-90px] bg-transparent shadow-lg rounded-md mt-2 p-2 z-10 w-48">
+              <div className="absolute right-[-180px] top-[-90px] bg-white shadow-lg rounded-md mt-2 p-2 z-10 w-48">
                 <ul className="space-y-1 bg-blue-50 rounded-lg">
-                  {/* Menu Items */}
+                  <li className="flex items-center p-2 hover:bg-blue-100 rounded">
+                    <img src="images/ChatBot.png" alt="ChatBot" className="w-5 h-5 mr-10" />
+                    <span>ChatBot</span>
+                  </li>
+                  <li className="flex items-center p-2 hover:bg-blue-100 rounded">
+                    <img src="images/DarkTheme.png" alt="Dark Mode" className="w-5 h-5 mr-10" />
+                    <span>Dark Mode</span>
+                  </li>
+                  <li className="flex items-center p-2 hover:bg-blue-100 rounded">
+                    <img src="images/Profile.png" alt="Profile" className="w-5 h-5 mr-10" />
+                    <span>Profile</span>
+                  </li>
+                  <li className="flex items-center p-2 hover:bg-blue-100 rounded">
+                    <img src="images/Setting.png" alt="Settings" className="w-5 h-5 mr-10" />
+                    <span>Settings</span>
+                  </li>
+                  <li className="flex items-center p-2 hover:bg-blue-100 rounded">
+                    <img src="images/Logout.png" alt="Logout" className="w-5 h-5 mr-10" />
+                    <span>Logout</span>
+                  </li>
                 </ul>
               </div>
             )}
@@ -206,23 +238,28 @@ export default function ControlPanel({ carData }) {
       </div>
 
       {/* Main Content */}
-      <div className="flex flex-col w-full p-4 h-full">
-        <div className="flex  space-x-2 h-[400px] ">
-          <div className="flex flex-col rounded-lg  h-[90%] shadow-lg">
-            <Carview latestCaptureData={carData} />
-          </div>
-          <div className="flex flex-col rounded-lg w-full h-[90%] shadow-lg">
-            <AlarmNotification />
-          </div>
-        </div>
+      <div className="p-4 w-full">
+      <div className="flex  sm:flex-col md:flex-col justify-between lg:flex-row h-auto space-y-2 md:space-y-0 md:space-x-2">
+  <div className="flex-[1_1_33%] md:flex-[1_1_33%] flex-col rounded-lg w-auto shadow-lg">
+    <Carview latestCaptureData={carData} />
+  </div>
+  <div className="flex-[1_1_66%] m-2 mt-0 md:flex-[2_1_66%] flex-col rounded-lg shadow-lg">
+    <AlarmNotification />
+  </div>
+</div>
+
+
+
 
         {/* Patrol History with overflow handling */}
-        <div className="flex flex-col border rounded-lg mb-0 h-full  p-2 shadow-lg">
-        <Heading size="headinglg" as="h1" className="text-black  shadow-lg ">
-          Patrol History
-        </Heading>
-        <hr />
-        <ScanningTable />
+        <div className=" relative flex flex-col border rounded-lg mt-2  p-2 shadow-lg  ">
+          <Heading size="headinglg" as="h1" className="text-black  ">
+            Patrol History
+            <hr className="border-black-700 my-2 " />  
+          </Heading>  
+          
+       
+          <ScanningTable />
         </div>
       </div>
     </div>

@@ -9,8 +9,16 @@ const ALERT_IMAGES = {
   Low: "images/AlertL.svg",     
 };
 
+const ALERT_COLORS = {
+  High: "text-black",    
+  Medium: "text-black",  // Bold black for Medium
+  Low: "text-black"      // Bold black for Low
+};
+
 export default function UserProfile({ ...props }) {
   console.log(props);
+  const alertColor = ALERT_COLORS[props.AlertLevel] || ALERT_COLORS['Low'];
+
   return (
     <>
       {props.AlertLevel !== "None" && (
@@ -25,13 +33,14 @@ export default function UserProfile({ ...props }) {
           />
           <div className="absolute right-[9.82px] top-[8.33px]" />
           <div className="flex flex-1 items-start gap-1.5 self-center pr-16">
-            <Text as="p" className="!font-medium text-blue_gray-900  w-14;">
-              {`${props.AlertLevel}, ${props.LicensePlate}, ${props.CarMake}/${props.CarModel}, ${props.State}`}
-              <br/>
+            <Text as="p" className={`font-manrope font-bold `}>
+            <span className="font-extrabold text-black-900">{props.AlertLevel}</span>
+              {` ,${props.LicensePlate}, ${props.CarMake}/${props.CarModel}, ${props.State}`}
+              <br />
               {`${props.CameraID} | ${formatDate(props.DateTime)}`}
             </Text>
-            <div className="absolute  right-6 flex gap-2 w-40">
-              <AlertActionButton label="Report"  />
+            <div className="absolute right-6 flex gap-2 w-40">
+              <AlertActionButton label="Report" className="bg-black-900 text-white-a700" />
               <AlertActionButton label="Resolve" />
             </div>
           </div>

@@ -30,14 +30,14 @@ export const Carview = ({ latestCaptureData }) => {
   const carData = useSelector((state) => state.cars.carData);
 
   return (
-    <div className="flex flex-col bg-white w-full h-full p-4 rounded-lg shadow-lg">
+    <div className="flex flex-col h-full p-4 rounded-lg font-manrope font-extrabold ">
       <Heading size="headinglg" as="h1" className="text-black mb-4">
         Active Patrol
         <hr className="m-2 border-gray-300 dark:border-gray-600" />
       </Heading>
      
       {latestCaptureData ? (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col ">
           <CaptureSlider dataArray={latestCaptureData.Images} />
           <LastPatrolStrap latestCaptureData={latestCaptureData} />
         </div>
