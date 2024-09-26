@@ -58,7 +58,8 @@ export default function ControlPanel({ carData }) {
 
   const startBeeping = () => {
     if (!audioCtxRef.current) {
-      audioCtxRef.current = new (window.AudioContext || window.webkitAudioContext)();
+      audioCtxRef.current = new (window.AudioContext ||
+        window.webkitAudioContext)();
     }
     const startBeep = () => {
       const oscillator = audioCtxRef.current.createOscillator();
@@ -133,7 +134,9 @@ export default function ControlPanel({ carData }) {
           <div className="flex flex-col items-center">
             <div
               className={`mb-1 rounded-full transition-all duration-300 ease-in-out ${
-                isAlertActive ? 'border-4' : 'border-4 border-[rgba(222,222,222,0.5)]'
+                isAlertActive
+                  ? "border-4"
+                  : "border-4 border-[rgba(222,222,222,0.5)]"
               } w-[91px] h-[91px] flex items-center justify-center`}
             >
               <button
@@ -155,7 +158,9 @@ export default function ControlPanel({ carData }) {
           <div className="flex flex-col items-center">
             <div
               className={`mb-1 rounded-full transition-all duration-300 ease-in-out ${
-                isAlertActive ? 'border-4' : 'border-4 border-[rgba(222,222,222,0.5)]'
+                isAlertActive
+                  ? "border-4"
+                  : "border-4 border-[rgba(222,222,222,0.5)]"
               } w-[91px] h-[91px] flex items-center justify-center`}
             >
               <button
@@ -177,7 +182,9 @@ export default function ControlPanel({ carData }) {
           <div className="flex flex-col items-center">
             <div
               className={`mb-1 rounded-full transition-all duration-300 ease-in-out ${
-                isAlertActive ? 'border-4 border-red-500' : 'border-4 border-[rgba(222,222,222,0.5)]'
+                isAlertActive
+                  ? "border-4 border-red-500"
+                  : "border-4 border-[rgba(222,222,222,0.5)]"
               } w-[91px] h-[91px] flex items-center justify-center`}
             >
               <button
@@ -190,7 +197,7 @@ export default function ControlPanel({ carData }) {
                 }`}
               >
                 <img
-                  src="images/AlertIcon.svg" 
+                  src="images/AlertIcon.svg"
                   alt="Alert"
                   className="w-2/3 h-2/3 mx-auto"
                 />
@@ -205,29 +212,53 @@ export default function ControlPanel({ carData }) {
               onClick={toggleMenu}
               className="mt-4 p-4 w-[80px] h-[80px] text-black"
             >
-              <img src="images/MenuIcon.svg" alt="Menu" className="w-1/2 h-1/2 mx-auto" />
+              <img
+                src="images/MenuIcon.svg"
+                alt="Menu"
+                className="w-1/2 h-1/2 mx-auto"
+              />
             </button>
             {isMenuOpen && (
               <div className="absolute right-[-180px] top-[-90px] bg-white shadow-lg rounded-md mt-2 p-2 z-10 w-48">
                 <ul className="space-y-1 bg-blue-50 rounded-lg">
                   <li className="flex items-center p-2 hover:bg-blue-100 rounded">
-                    <img src="images/ChatBot.png" alt="ChatBot" className="w-5 h-5 mr-10" />
+                    <img
+                      src="images/ChatBot.png"
+                      alt="ChatBot"
+                      className="w-5 h-5 mr-10"
+                    />
                     <span>ChatBot</span>
                   </li>
                   <li className="flex items-center p-2 hover:bg-blue-100 rounded">
-                    <img src="images/DarkTheme.png" alt="Dark Mode" className="w-5 h-5 mr-10" />
+                    <img
+                      src="images/DarkTheme.png"
+                      alt="Dark Mode"
+                      className="w-5 h-5 mr-10"
+                    />
                     <span>Dark Mode</span>
                   </li>
                   <li className="flex items-center p-2 hover:bg-blue-100 rounded">
-                    <img src="images/Profile.png" alt="Profile" className="w-5 h-5 mr-10" />
+                    <img
+                      src="images/Profile.png"
+                      alt="Profile"
+                      className="w-5 h-5 mr-10"
+                    />
                     <span>Profile</span>
                   </li>
                   <li className="flex items-center p-2 hover:bg-blue-100 rounded">
-                    <img src="images/Setting.png" alt="Settings" className="w-5 h-5 mr-10" />
+                    <img
+                      src="images/Setting.png"
+                      alt="Settings"
+                      className="w-5 h-5 mr-10"
+                    />
                     <span>Settings</span>
                   </li>
                   <li className="flex items-center p-2 hover:bg-blue-100 rounded">
-                    <img src="images/Logout.png" alt="Logout" className="w-5 h-5 mr-10" />
+                    <img
+                      src="images/Logout.png"
+                      alt="Logout"
+                      className="w-5 h-5 mr-10"
+                    />
                     <span>Logout</span>
                   </li>
                 </ul>
@@ -239,26 +270,22 @@ export default function ControlPanel({ carData }) {
 
       {/* Main Content */}
       <div className="p-4 w-full">
-      <div className="flex  sm:flex-col md:flex-col justify-between lg:flex-row h-auto space-y-2 md:space-y-0 md:space-x-2">
-  <div className="flex-[1_1_33%] md:flex-[1_1_33%] flex-col rounded-lg w-auto shadow-lg">
-    <Carview latestCaptureData={carData} />
-  </div>
-  <div className="flex-[1_1_66%] m-2 mt-0 md:flex-[2_1_66%] flex-col rounded-lg shadow-lg">
-    <AlarmNotification />
-  </div>
-</div>
-
-
-
+        <div className="flex  sm:flex-col md:flex-col justify-between lg:flex-row h-auto space-y-2 md:space-y-0 md:space-x-2">
+          <div className="flex-[1_1_33%] md:flex-[1_1_33%] flex-col rounded-lg w-auto shadow-lg">
+            <Carview latestCaptureData={carData} />
+          </div>
+          <div className="flex-[1_1_66%] m-2 mt-0 md:flex-[2_1_66%] flex-col rounded-lg shadow-lg">
+            <AlarmNotification />
+          </div>
+        </div>
 
         {/* Patrol History with overflow handling */}
-        <div className=" relative flex flex-col border rounded-lg mt-2  p-2 shadow-lg  ">
+        <div className="h-[50%] relative flex flex-col border rounded-lg mt-2  p-2 shadow-lg  ">
           <Heading size="headinglg" as="h1" className="text-black  ">
             Patrol History
-            <hr className="border-black-700 my-2 " />  
-          </Heading>  
-          
-       
+            <hr className="border-black-700 my-2 " />
+          </Heading>
+
           <ScanningTable />
         </div>
       </div>
