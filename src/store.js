@@ -7,8 +7,7 @@ export const UPDATE_NOTIFICATION_COUNT = "UPDATE_NOTIFICATION_COUNT";
 
 
 const initialState = {
-  carData,
-  // carData:[]
+  carData:[]
 };
 
 const carsReducer = (state = initialState, action) => {
