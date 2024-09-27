@@ -33,7 +33,7 @@ export const Carview = ({ latestCaptureData }) => {
     <div className="flex flex-col h-full p-4 rounded-lg font-manrope font-extrabold ">
       <Heading size="headinglg" as="h1" className="text-black mb-4">
         Active Patrol
-        <hr className="m-2 border-gray-300 dark:border-gray-600" />
+        <hr className="mt-4 border-gray-300 dark:border-gray-600" />
       </Heading>
      
       {latestCaptureData ? (

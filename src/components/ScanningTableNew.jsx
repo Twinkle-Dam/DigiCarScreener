@@ -35,8 +35,11 @@ export default function ScanningTable() {
             {/* Render Camera ID and DateTime at the top left */}
             <div className="flex flex-col flex-grow">
               <div className="flex ">
-                <Text className="text-black-900 dark:text-white-a700 mr-2">
+                <Text className="text-black-900 dark:text-white-a700 ml-2">
                   {car.CameraID || "--"}
+                </Text>
+                <Text className="text-black-900 dark:text-white-a700 ml-2 mr-2">
+                  {" | "}
                 </Text>
                 <Text className="text-black-900 dark:text-white-a700">
                   {formatDate(car.DateTime) || "--"}
@@ -47,7 +50,7 @@ export default function ScanningTable() {
                 {STRAP_ARRAY.map(({ label, dataColumn }) => (
                   <div
                     key={dataColumn}
-                    className="flex flex-col items-start flex-grow"
+                    className="flex flex-col items-start flex-grow p-2"
                   >
                     <Heading
                       as="h5"

@@ -126,10 +126,10 @@ export default function ControlPanel({ carData }) {
   return (
     <div className="flex w-full h-screen md:flex-wrap">
       {/* Sidebar - Enforcement Tab */}
-      <div className="rounded-lg border dark:bg-slate-800 p-4 border-r border-gray-300 w-[10%] h-full shadow-lg md:w-1/2">
+      <div className="dark:bg-slate-800 p-4 border-r border-gray-300 w-[10%] h-full shadow-lg md:w-1/2">
         <img src="images/logoo.png" alt="Logo" className="mb-4" />
 
-        <div className="mt-8 space-y-4">
+        <div className="mt-20 space-y-4 flex flex-col gap-4">
           {/* Start Button */}
           <div className="flex flex-col items-center">
             <div
@@ -153,7 +153,6 @@ export default function ControlPanel({ carData }) {
             </div>
             <p className="mt-2 text-black">Start Patrol</p>
           </div>
-
           {/* Stop Button */}
           <div className="flex flex-col items-center">
             <div
@@ -177,7 +176,6 @@ export default function ControlPanel({ carData }) {
             </div>
             <p className="mt-2 text-black">Stop Patrol</p>
           </div>
-
           {/* Alert Button */}
           <div className="flex flex-col items-center">
             <div
@@ -205,59 +203,58 @@ export default function ControlPanel({ carData }) {
             </div>
             <p className="mt text-black">Notifications</p>
           </div>
-
-          {/* Menu Button */}
-          <div className="flex flex-col items-center relative">
-            <button
-              onClick={toggleMenu}
-              className="mt-4 p-4 w-[80px] h-[80px] text-black"
-            >
+          {/*Menu Button */}
+          <div className="flex flex-col items-center relative z-50">
+            <button onClick={toggleMenu} className="mt-20 p-8">
               <img
                 src="images/MenuIcon.svg"
                 alt="Menu"
-                className="w-1/2 h-1/2 mx-auto"
+                className="w-full h-full mx-auto"
               />
             </button>
             {isMenuOpen && (
-              <div className="absolute right-[-180px] top-[-90px] bg-white shadow-lg rounded-md mt-2 p-2 z-10 w-48">
-                <ul className="space-y-1 bg-blue-50 rounded-lg">
-                  <li className="flex items-center p-2 hover:bg-blue-100 rounded">
+              <div
+                style={{ backgroundColor: "white" }}
+                className="absolute right-[-200px] top-[-150px] shadow-lg rounded-md mt-2 p-4 w-56"
+              >
+                <ul className="space-y-2 bg-white rounded-lg">
+                  <li className="flex items-center p-3 hover:bg-blue-100 rounded border-b border-blue-100 last:border-b-0">
                     <img
                       src="images/ChatBot.png"
                       alt="ChatBot"
-                      className="w-5 h-5 mr-10"
+                      className="w-6 h-6 mr-6"
                     />
                     <span>ChatBot</span>
                   </li>
-                  <li className="flex items-center p-2 hover:bg-blue-100 rounded">
+                  <li className="flex items-center p-3 hover:bg-blue-100 rounded border-b border-blue-100 last:border-b-0">
                     <img
                       src="images/DarkTheme.png"
                       alt="Dark Mode"
-                      className="w-5 h-5 mr-10"
+                      className="w-6 h-6 mr-6"
                     />
-                    <span>Dark Mode</span>
+                    <span>Dark Theme</span>
                   </li>
-                  <li className="flex items-center p-2 hover:bg-blue-100 rounded">
+                  <li className="flex items-center p-3 hover:bg-blue-100 rounded border-b border-blue-100 last:border-b-0">
                     <img
                       src="images/Profile.png"
                       alt="Profile"
-                      className="w-5 h-5 mr-10"
+                      className="w-6 h-6 mr-6"
                     />
                     <span>Profile</span>
                   </li>
-                  <li className="flex items-center p-2 hover:bg-blue-100 rounded">
+                  <li className="flex items-center p-3 hover:bg-blue-100 rounded border-b border-blue-100 last:border-b-0">
                     <img
                       src="images/Setting.png"
                       alt="Settings"
-                      className="w-5 h-5 mr-10"
+                      className="w-6 h-6 mr-6"
                     />
                     <span>Settings</span>
                   </li>
-                  <li className="flex items-center p-2 hover:bg-blue-100 rounded">
+                  <li className="flex items-center p-3 hover:bg-blue-100 rounded">
                     <img
                       src="images/Logout.png"
                       alt="Logout"
-                      className="w-5 h-5 mr-10"
+                      className="w-6 h-6 mr-6"
                     />
                     <span>Logout</span>
                   </li>
@@ -269,23 +266,35 @@ export default function ControlPanel({ carData }) {
       </div>
 
       {/* Main Content */}
-      <div className="p-4 w-full">
-        <div className="flex  sm:flex-col md:flex-col justify-between lg:flex-row h-auto space-y-2 md:space-y-0 md:space-x-2">
-          <div className="flex-[1_1_33%] md:flex-[1_1_33%] flex-col rounded-lg w-auto shadow-lg">
+      <div
+        style={{ backgroundColor: "rgb(237 237 237)" }}
+        className="p-6 w-full"
+      >
+        <div className="flex sm:flex-col md:flex-col justify-between lg:flex-row h-auto md:space-y-0 md:space-x-2 gap-6">
+          <div
+            style={{ backgroundColor: "white" }}
+            className="flex-[1_1_33%] md:flex-[1_1_33%] flex-col rounded-lg w-auto shadow-lg"
+          >
             <Carview latestCaptureData={carData} />
           </div>
-          <div className="flex-[1_1_66%] m-2 mt-0 md:flex-[2_1_66%] flex-col rounded-lg shadow-lg">
+
+          <div
+            style={{ backgroundColor: "white" }}
+            className="flex-[1_1_66%] md:flex-[2_1_66%] flex-col rounded-lg shadow-lg"
+          >
             <AlarmNotification />
           </div>
         </div>
 
         {/* Patrol History with overflow handling */}
-        <div className="h-[50%] relative flex flex-col border rounded-lg mt-2  p-2 shadow-lg  ">
+        <div
+          style={{ backgroundColor: "white" }}
+          className="h-[52%] relative flex flex-col border rounded-lg mt-6 p-6 shadow-lg  "
+        >
           <Heading size="headinglg" as="h1" className="text-black  ">
             Patrol History
             <hr className="border-black-700 my-2 " />
           </Heading>
-
           <ScanningTable />
         </div>
       </div>
