@@ -31,7 +31,8 @@ const Switch = ({
         onChange={handleChange}
         checkedIcon={checkedIcon}
         uncheckedIcon={uncheckedIcon}
-        className="h-6 w-10 "
+        className="h-6 w-6"
+        onColor="#66b3ff"
       />
     </div>
   );
