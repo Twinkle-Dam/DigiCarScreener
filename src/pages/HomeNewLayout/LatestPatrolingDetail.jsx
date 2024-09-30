@@ -3,16 +3,13 @@ import { Text, Heading } from "../../components";
 
 export const LatestPatrolingDetail = ({ label, detail }) => {
   return (
-    <div className="flex justify-between items-center w-full">
-      <Heading
-        as="p"
-        className=" text-black-500 dark:text-white-a700 whitespace-nowrap"
-      >
+    <div className="flex items-start gap-1">
+      <p className="text-black-900 dark:text-white-a700  whitespace-nowrap text-[14px] font-medium leading-[19.12px]">
         {label}:
-      </Heading>
+      </p>
       <Text
         as="p"
-        className="text-black-500 whitespace-nowrap dark:text-white-a700 text-right"
+        className="text-black-900 whitespace-nowrap dark:text-white-a700"
       >
         {detail || "--"}
       </Text>

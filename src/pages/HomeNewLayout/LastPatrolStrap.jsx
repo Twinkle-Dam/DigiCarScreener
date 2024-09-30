@@ -6,13 +6,13 @@ import { Text } from "components";
 
 export const LastPatrolStrap = ({ latestCaptureData }) => {
   return (
-    <div className="flex flex-col gap-[16px] w-[383px] h-[110px] font-manrope">
+    <div className="flex flex-col justify-between gap-[10px] w-[383px] h-[110px] font-manrope">
       <LatestPatrolingDetail
-        label={<span className="font-semibold text-[14px] leading-[19.12px]">Camera ID</span>}
+        label="Camera ID"
         detail={latestCaptureData?.CameraID}
       />
       <LatestPatrolingDetail
-        label={<span className="font-semibold text-[14px] leading-[19.12px]">License No/State</span>}
+        label="License No/State"
         detail={
           latestCaptureData?.LicensePlate && latestCaptureData?.State
             ? `${latestCaptureData?.LicensePlate}/${latestCaptureData?.State}`
@@ -20,7 +20,7 @@ export const LastPatrolStrap = ({ latestCaptureData }) => {
         }
       />
       <LatestPatrolingDetail
-        label={<span className="font-semibold text-[14px] leading-[19.12px]">Make/Model/Color</span>}
+        label="Make/Model/Color"
         detail={
           latestCaptureData?.CarModel &&
           latestCaptureData?.CarMake &&
@@ -30,7 +30,7 @@ export const LastPatrolStrap = ({ latestCaptureData }) => {
         }
       />
       <LatestPatrolingDetail
-        label={<span className="font-semibold text-[14px] leading-[19.12px]">Date & Time/GPS</span>}
+        label="Date & Time/GPS"
         detail={
           latestCaptureData ? (
             <div className="flex items-start gap-1">

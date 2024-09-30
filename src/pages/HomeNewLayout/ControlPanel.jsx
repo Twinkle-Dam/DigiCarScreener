@@ -58,7 +58,8 @@ export default function ControlPanel({ carData }) {
 
   const startBeeping = () => {
     if (!audioCtxRef.current) {
-      audioCtxRef.current = new (window.AudioContext || window.webkitAudioContext)();
+      audioCtxRef.current = new (window.AudioContext ||
+        window.webkitAudioContext)();
     }
     const startBeep = () => {
       const oscillator = audioCtxRef.current.createOscillator();
@@ -128,68 +129,132 @@ export default function ControlPanel({ carData }) {
         <div className="space-y-4 flex flex-col gap-4">
           {/* Start Button */}
           <div className="flex flex-col items-center mb-4">
-            <div className={`border-2 border-gray-200 rounded-full p-1.5 ${isAlertActive ? "border-4" : ""}`}>
-              <div className={` rounded-full transition-all duration-300 ease-in-out ${isAlertActive ? "border-4" : "border-4 border-[rgba(222,222,222,0.5)]"} w-[91px] h-[91px] flex items-center justify-center`}>
+            <div
+              className={`border-2 border-gray-200 rounded-full p-1 ${
+                isAlertActive ? "border-4" : ""
+              }`}
+            >
+              <div
+                className={` rounded-full transition-all duration-300 ease-in-out ${
+                  isAlertActive
+                    ? "border-4"
+                    : "border-4 border-[rgba(222,222,222,0.5)]"
+                } w-[91px] h-[91px] flex items-center justify-center`}
+              >
                 <button
                   onClick={toggleStartPatrol}
                   disabled={!isStartButtonEnabled}
                   className={`p-4 w-[80px] h-[80px] border border-gray-500 rounded-full shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-105
-                     ${isPatrolStarted ? "bg-[linear-gradient(180deg,_#FFAF2F_14.87%,_#9C6712_87.03%)]" : "bg-[linear-gradient(180deg,_#1BD961_14.87%,_#024937_87.03%)]"}`}
+                     ${
+                       isPatrolStarted
+                         ? "bg-[linear-gradient(180deg,_#FFAF2F_14.87%,_#9C6712_87.03%)]"
+                         : "bg-[linear-gradient(180deg,_#1BD961_14.87%,_#024937_87.03%)]"
+                     }`}
                 >
                   {isPatrolStarted ? "Pause" : "Start"}
                 </button>
               </div>
             </div>
-            <p className="font-manrope text-[12px] font-medium leading-[20px] tracking-[0.01em] text-left">Start Patrol</p>
+            <p className="font-manrope text-[12px] font-medium leading-[20px] tracking-[0.01em] text-left">
+              Start Patrol
+            </p>
           </div>
           {/* Stop Button */}
           <div className="flex flex-col items-center mb-4">
-            <div className={`border-2 border-gray-200 rounded-full p-1.5 ${isAlertActive ? "border-4" : ""}`}>
-              <div className={` rounded-full transition-all duration-300 ease-in-out ${isAlertActive ? "border-4" : "border-4 border-[rgba(222,222,222,0.5)]"} w-[91px] h-[91px] flex items-center justify-center`}>
+            <div
+              className={`border-2 border-gray-200 rounded-full p-1 ${
+                isAlertActive ? "border-4" : ""
+              }`}
+            >
+              <div
+                className={` rounded-full transition-all duration-300 ease-in-out ${
+                  isAlertActive
+                    ? "border-4"
+                    : "border-4 border-[rgba(222,222,222,0.5)]"
+                } w-[91px] h-[91px] flex items-center justify-center`}
+              >
                 <button
                   onClick={toggleStopPatrol}
                   disabled={!isStopButtonEnabled}
-                  className={`p-4 w-[80px] h-[80px] border-2 border-gray-500 rounded-full shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-105 ${isPatrolStarted ? "bg-[linear-gradient(360deg,_#FF0000_0%,_#811325_100%)]" : "bg-[linear-gradient(360deg,_#EEEEEE_0%,_#B4B4B4_100%)]"}`}
+                  className={`p-4 w-[80px] h-[80px] border-2 border-gray-500 rounded-full shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-105 ${
+                    isPatrolStarted
+                      ? "bg-[linear-gradient(360deg,_#FF0000_0%,_#811325_100%)]"
+                      : "bg-[linear-gradient(360deg,_#EEEEEE_0%,_#B4B4B4_100%)]"
+                  }`}
                 >
                   Stop
                 </button>
               </div>
             </div>
-            <p className="font-manrope text-[12px] font-medium leading-[20px] tracking-[0.01em] text-left">Stop Patrol</p>
+            <p className="font-manrope text-[12px] font-medium leading-[20px] tracking-[0.01em] text-left">
+              Stop Patrol
+            </p>
           </div>
           {/* Alert Button */}
           <div className="flex flex-col items-center mb-4">
-            <div className={`border-2 border-gray-200 rounded-full p-1.5 ${isAlertActive ? "border-red-400" : ""}`}>
-              <div className={` rounded-full transition-all duration-300 ease-in-out ${isAlertActive ? "border-4 border-red-200" : "border-4 border-[rgba(222,222,222,0.5)]"} w-[91px] h-[91px] flex items-center justify-center`}>
+            <div
+              className={`border-2 border-gray-200 rounded-full p-1 ${
+                isAlertActive ? "border-red-400" : ""
+              }`}
+            >
+              <div
+                className={` rounded-full transition-all duration-300 ease-in-out ${
+                  isAlertActive
+                    ? "border-4 border-red-200"
+                    : "border-4 border-[rgba(222,222,222,0.5)]"
+                } w-[91px] h-[91px] flex items-center justify-center`}
+              >
                 <button
                   onClick={handleAlertButtonClick}
                   disabled={!isAlertButtonEnabled}
-                  className={`p-2 w-[80px] h-[80px] border-2 rounded-full shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-105 ${isAlertActive ? "bg-[linear-gradient(180deg,_#D6AB00_0%,_#FFEE7D_100%)]" : "bg-[linear-gradient(180deg,_#D6AB00_0%,_#FFEE7D_100%)]"}`}
+                  className={`p-2 w-[80px] h-[80px] border-2 rounded-full shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-105 ${
+                    isAlertActive
+                      ? "bg-[linear-gradient(180deg,_#D6AB00_0%,_#FFEE7D_100%)]"
+                      : "bg-[linear-gradient(180deg,_#D6AB00_0%,_#FFEE7D_100%)]"
+                  }`}
                 >
-                  <img src="images/AlertIcon.svg" alt="Alert" className="w-1/3 h-1/3 mx-auto" />
+                  <img
+                    src="images/AlertIcon.svg"
+                    alt="Alert"
+                    className="w-1/3 h-1/3 mx-auto"
+                  />
                 </button>
               </div>
             </div>
-            <p className="font-manrope text-[12px] font-medium leading-[20px] tracking-[0.01em] text-left">Alerts & Notifications</p>
+            <p className="font-manrope text-[12px] font-medium leading-[20px] tracking-[0.01em] text-left whitespace-nowrap">
+              Alerts & Notifications
+            </p>
           </div>
         </div>
         <Menu />
       </div>
 
       {/* Main Content */}
-      <div style={{ backgroundColor: "rgb(237 237 237)" }} className="p-4 w-full">
+      <div
+        style={{ backgroundColor: "rgb(237 237 237)" }}
+        className="p-4 w-full"
+      >
         <div className="flex sm:flex-col md:flex-col justify-between lg:flex-row h-auto md:space-y-0 md:space-x-2 gap-6">
-          <div style={{ backgroundColor: "white" }} className="flex-[1_1_33%] md:flex-[1_1_33%] flex-col rounded-lg w-auto shadow-lg">
+          <div
+            style={{ backgroundColor: "white" }}
+            className="flex-[1_1_33%] md:flex-[1_1_33%] flex-col rounded-lg w-auto shadow-lg"
+          >
             <Carview latestCaptureData={carData} />
           </div>
 
-          <div style={{ backgroundColor: "white" }} className="flex-[1_1_66%] md:flex-[2_1_66%] flex-col rounded-lg shadow-lg">
+          <div
+            style={{ backgroundColor: "white" }}
+            className="flex-[1_1_66%] md:flex-[2_1_66%] flex-col rounded-lg shadow-lg"
+          >
             <AlarmNotification />
           </div>
         </div>
 
         {/* Patrol History with overflow handling */}
-        <div style={{ backgroundColor: "white" }} className="h-[48%] relative flex flex-col border rounded-lg mt-4 p-4 shadow-lg">
+        <div
+          style={{ backgroundColor: "white" }}
+          className="h-[50%] relative flex flex-col border rounded-lg mt-4 p-4 shadow-lg"
+        >
           <Heading size="headinglg" as="h1" className="text-black">
             Patrol History
             <hr className="border-black-700 my-2" />

@@ -61,8 +61,7 @@ export default function ScanningTable() {
                     >
                       <Heading
                         as=""
-                        className="text-gray-500 dark:text-gray-400 text-center font-manrope text-[13px] font-medium leading-[20px] tracking-[0.01em]
-"
+                        className="font-manrope text-[12px] font-medium leading-[20px] tracking-[0.01em] text-left whitespace-nowrap text-gray-500 dark:text-gray-400"
                       >
                         {label}
                       </Heading>
