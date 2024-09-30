@@ -10,9 +10,9 @@ const ALERT_IMAGES = {
 };
 
 const ALERT_COLORS = {
-  High: "text-black",
-  Medium: "text-black",
-  Low: "text-black",
+  High: "text-black dark:text-white", 
+  Medium: "text-black dark:text-white", 
+  Low: "text-black dark:text-white",
 };
 
 export default function UserProfile({ ...props }) {
@@ -35,8 +35,8 @@ export default function UserProfile({ ...props }) {
           <div className="absolute right-[9.82px] top-[8.33px]" />
           <div className="relative flex flex-1 md:flex-row md:items-start md:gap-1.5 pr-6">
             <div className="flex-1">
-              <Text as="p" className="font-manrope font-bold text-md">
-                <span className="font-extrabold text-black-900">
+              <Text as="p" className={`font-manrope font-bold text-md ${alertColor}`}>
+                <span className="font-extrabold">
                   {props.AlertLevel}
                 </span>
                 {"\u00A0"}
@@ -51,7 +51,10 @@ export default function UserProfile({ ...props }) {
                 label="REPORT"
                 className="bg-black-900 text-white-a700"
               />
-              <AlertActionButton label="RESOLVE" />
+              <AlertActionButton 
+                label="RESOLVE"
+                className="text-black-900 dark:text-white-a700" 
+              />
             </div>
           </div>
         </div>

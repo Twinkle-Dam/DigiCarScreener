@@ -17,9 +17,9 @@ export const carData = [
     BodyType: "Sedan",
     CarYear: "2015-2016",
     Images: [
-      "images/img_image.png",
-      "images/img_image.png",
-      "images/img_image.png",
+      "images/imageCar4.png",
+      "images/imageCar4.png",
+      "images/imageCar4.png",
     ],
   },
   {
@@ -59,7 +59,7 @@ export const carData = [
     Images: ["images/imageCar1.svg", "images/imageCar.svg"],
   },
 
-  {
+   {
     CameraID: "Front#9012D",
     CarMake: "Nissan",
     CarModel: "Altima",
@@ -130,7 +130,7 @@ export const carData = [
     Orientation: 330,
     BodyType: "SUV",
     CarYear: "2019-2020",
-    Images: ["images/img_image.png"],
+    Images: ["images/imageCar.svg"],
   },
  
  

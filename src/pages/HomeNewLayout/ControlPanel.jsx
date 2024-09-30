@@ -122,7 +122,7 @@ export default function ControlPanel({ carData }) {
   return (
     <div className="flex w-full h-screen md:flex-wrap font-manrope">
       {/* Sidebar - Enforcement Tab */}
-      <div className="flex flex-col justify-between dark:bg-slate-800 p-4 border-r border-gray-300 w-[11%] shadow-lg md:w-1/2">
+      <div className="flex flex-col justify-between dark:bg-slate-800 p-4 border-r border-gray-300 w-[10%]  shadow-lg md:w-1/2">
         <div>
           <img src="images/logoo.png" alt="Logo" />
         </div>
@@ -155,7 +155,7 @@ export default function ControlPanel({ carData }) {
                 </button>
               </div>
             </div>
-            <p className="font-manrope text-[12px] font-medium leading-[20px] tracking-[0.01em] text-left">
+            <p className="font-manrope text-[12px] font-medium leading-[20px] tracking-[0.01em] text-left dark:text-white-a700">
               Start Patrol
             </p>
           </div>
@@ -186,7 +186,7 @@ export default function ControlPanel({ carData }) {
                 </button>
               </div>
             </div>
-            <p className="font-manrope text-[12px] font-medium leading-[20px] tracking-[0.01em] text-left">
+            <p className="font-manrope text-[12px] dark:text-white-a700 font-medium leading-[20px] tracking-[0.01em] text-left">
               Stop Patrol
             </p>
           </div>
@@ -221,7 +221,7 @@ export default function ControlPanel({ carData }) {
                 </button>
               </div>
             </div>
-            <p className="font-manrope text-[12px] font-medium leading-[20px] tracking-[0.01em] text-left whitespace-nowrap">
+            <p className="font-manrope text-[12px] dark:text-white-a700 font-medium leading-[20px] tracking-[0.01em] text-left whitespace-nowrap">
               Alerts & Notifications
             </p>
           </div>
@@ -251,11 +251,9 @@ export default function ControlPanel({ carData }) {
         </div>
 
         {/* Patrol History with overflow handling */}
-        <div
-          style={{ backgroundColor: "white" }}
-          className="h-[50%] relative flex flex-col border rounded-lg mt-4 p-4 shadow-lg"
+        <div className="h-[49%] relative flex flex-col border rounded-lg mt-4 p-4 shadow-lg bg-white-a700 dark:bg-dark-700"
         >
-          <Heading size="headinglg" as="h1" className="text-black">
+          <Heading size="headinglg" as="h1" className="text-black dark:text-white-a700">
             Patrol History
             <hr className="border-black-700 my-2" />
           </Heading>

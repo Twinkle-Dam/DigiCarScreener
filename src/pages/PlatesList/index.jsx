@@ -111,7 +111,7 @@ const PlatesList = () => {
               value={plateInput}
               onChange={(e) => setPlateInput(e.target.value.toUpperCase())}
               placeholder="Enter License Plate"
-              className="border  dark:border-slate-900 border-black-700 rounded-lg p-2 mr-2 dark:text-slate-200 text-dark-700"
+              className=" dark:border-white-a700 rounded-lg p-2 mr-2 dark:text-white-a700 text-dark-700"
             />
             <button
               onClick={handleAddOrUpdate}
@@ -132,8 +132,8 @@ const PlatesList = () => {
           <table className="w-full border-separate border-2 text-center ">
             <thead>
               <tr>
-                <th className={`bg-gray-700 text-white p-3 ${isDarkMode ? 'border-white' : 'border-black'}`}>License Plate</th>
-                <th className={`bg-gray-700 text-white p-3 ${isDarkMode ? 'border-white' : 'border-black'}`}>Actions</th>
+                <th className="bg-gray-700 text-white p-3  dark:text-white-a700">License Plate</th>
+                <th className="bg-gray-700 text-white p-3 dark:text-white-a700">Actions</th>
               </tr>
             </thead>
             <tbody>

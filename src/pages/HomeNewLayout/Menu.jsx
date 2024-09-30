@@ -1,3 +1,4 @@
+import { Switch } from "components";
 import React from "react";
 import { useState } from "react";
 
@@ -8,7 +9,7 @@ export default function Menu() {
   };
 
   return (
-    <div className="flex flex-col items-center relative z-50">
+    <div className="flex flex-col items-center relative z-50 ">
       <button onClick={toggleMenu} className="">
         <img
           src="images/MenuIcon.svg"
@@ -18,31 +19,32 @@ export default function Menu() {
       </button>
       {isMenuOpen && (
         <div
-          style={{ backgroundColor: "white" }}
-          className="absolute left-[70px] bottom-[0px] shadow-lg rounded-md mt-2 p-4 w-56"
+     
+          className="absolute left-[70px] bottom-[0px] shadow-lg rounded-md mt-2 p-4 w-56 bg-white-a700  dark:bg-dark-700 dark:text-white-a700"
         >
-          <ul className="space-y-2 bg-white rounded-lg">
+          <ul className="space-y-2 bg-white rounded-lg ">
             <li className="flex items-center p-3 hover:bg-blue-100 rounded border-b border-blue-100 last:border-b-0">
               <img
                 src="images/ChatBot.png"
                 alt="ChatBot"
-                className="w-6 h-6 mr-6"
+                className="w-6 h-6 mr-9"
               />
               <span>ChatBot</span>
             </li>
-            <li className="flex items-center p-3 hover:bg-blue-100 rounded border-b border-blue-100 last:border-b-0">
+            <li className="flex items-center p-3  hover:bg-blue-100 rounded border-b border-blue-100 last:border-b-0">
               <img
                 src="images/DarkTheme.png"
                 alt="Dark Mode"
                 className="w-6 h-6 mr-6"
               />
-              <span>Dark Theme</span>
+              <Switch />
+              <span >Dark Theme</span>
             </li>
             <li className="flex items-center p-3 hover:bg-blue-100 rounded border-b border-blue-100 last:border-b-0">
               <img
                 src="images/Profile.png"
                 alt="Profile"
-                className="w-6 h-6 mr-6"
+                className="w-6 h-6 mr-9"
               />
               <span>Profile</span>
             </li>
@@ -50,7 +52,7 @@ export default function Menu() {
               <img
                 src="images/Setting.png"
                 alt="Settings"
-                className="w-6 h-6 mr-6"
+                className="w-6 h-6 mr-9"
               />
               <span>Settings</span>
             </li>
@@ -58,7 +60,7 @@ export default function Menu() {
               <img
                 src="images/Logout.png"
                 alt="Logout"
-                className="w-6 h-6 mr-6"
+                className="w-6 h-6 mr-9"
               />
               <span>Logout</span>
             </li>

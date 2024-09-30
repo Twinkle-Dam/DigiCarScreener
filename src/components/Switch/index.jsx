@@ -25,14 +25,14 @@ const Switch = ({
   };
 
   return (
-    <div className={className}>
+    <div className={`transform scale-50 ${className}`}>
       <SwitchProvider
         checked={selected}
         onChange={handleChange}
         checkedIcon={checkedIcon}
         uncheckedIcon={uncheckedIcon}
+        className="h-6 w-10 "
       />
-      
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { Text, Heading } from "../../components";
 
 export const LatestPatrolingDetail = ({ label, detail }) => {
   return (
-    <div className="flex items-start gap-1">
+    <div className="flex items-start justify-between ">
       <p className="text-black-900 dark:text-white-a700  whitespace-nowrap text-[14px] font-medium leading-[19.12px]">
         {label}:
       </p>

@@ -6,7 +6,7 @@ export const STOP_PATROL = "STOP_PATROL";
 export const UPDATE_NOTIFICATION_COUNT = "UPDATE_NOTIFICATION_COUNT";
 
 const initialState = {
-  carData,
+  carData:[]
 };
 
 const carsReducer = (state = initialState, action) => {

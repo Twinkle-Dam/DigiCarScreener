@@ -29,11 +29,10 @@ export default function CaptureSlider({ dataArray }) {
                   width: "100%",
                   height: "120px", 
                   objectFit: "cover",
-                  borderRadius: "0.9rem"
+                  borderRadius: "5px"
                   
 
-                  
-                  
+                                   
                 }}
               />
             </div>
