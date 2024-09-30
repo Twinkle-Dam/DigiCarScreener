@@ -23,12 +23,12 @@ export default function Menu() {
               <img
                 src="images/ChatBot.png"
                 alt="ChatBot"
-                className="w-6 h-6 mr-4"
+                className="w-6 h-6 mr-6"
               />
               <span>ChatBot</span>
             </li>
             <li className="flex items-center p-3 mr-4 hover:bg-blue-100 rounded border-b border-blue-100 last:border-b-0">
-              <div className="flex items-center gap-3  mr-4 ">
+              <div className="flex items-center gap-3  mr-6 ">
                 <Switch />
               </div>
               <span>Dark Theme</span>
@@ -37,7 +37,7 @@ export default function Menu() {
               <img
                 src="images/Profile.png"
                 alt="Profile"
-                className="w-6 h-6 mr-4"
+                className="w-6 h-6 mr-6"
               />
               <span>Profile</span>
             </li>
@@ -45,7 +45,7 @@ export default function Menu() {
               <img
                 src="images/Setting.png"
                 alt="Settings"
-                className="w-6 h-6 mr-4"
+                className="w-6 h-6 mr-6"
               />
               <span>Settings</span>
             </li>
@@ -53,7 +53,7 @@ export default function Menu() {
               <img
                 src="images/Logout.png"
                 alt="Logout"
-                className="w-6 h-6 mr-4"
+                className="w-6 h-6 mr-6"
               />
               <span>Logout</span>
             </li>
