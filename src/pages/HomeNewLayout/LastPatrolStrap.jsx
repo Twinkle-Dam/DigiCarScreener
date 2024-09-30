@@ -6,13 +6,13 @@ import { Text } from "components";
 
 export const LastPatrolStrap = ({ latestCaptureData }) => {
   return (
-    <div className="flex flex-col gap-3 ">
+    <div className="flex flex-col gap-[16px] w-[383px] h-[110px] font-manrope">
       <LatestPatrolingDetail
-        label="Camera ID"
+        label={<span className="font-semibold text-[14px] leading-[19.12px]">Camera ID</span>}
         detail={latestCaptureData?.CameraID}
       />
       <LatestPatrolingDetail
-        label="License No/State"
+        label={<span className="font-semibold text-[14px] leading-[19.12px]">License No/State</span>}
         detail={
           latestCaptureData?.LicensePlate && latestCaptureData?.State
             ? `${latestCaptureData?.LicensePlate}/${latestCaptureData?.State}`
@@ -20,7 +20,7 @@ export const LastPatrolStrap = ({ latestCaptureData }) => {
         }
       />
       <LatestPatrolingDetail
-        label="Make/Model/Color"
+        label={<span className="font-semibold text-[14px] leading-[19.12px]">Make/Model/Color</span>}
         detail={
           latestCaptureData?.CarModel &&
           latestCaptureData?.CarMake &&
@@ -30,14 +30,14 @@ export const LastPatrolStrap = ({ latestCaptureData }) => {
         }
       />
       <LatestPatrolingDetail
-        label="Date & Time/GPS"
+        label={<span className="font-semibold text-[14px] leading-[19.12px]">Date & Time/GPS</span>}
         detail={
           latestCaptureData ? (
-            <div className="flex items-start gap-2">
-              <Text className="text-black-900 dark:text-white-a700 whitespace-nowrap">
+            <div className="flex items-start gap-1">
+              <Text className="text-black-500 dark:text-white-a700 whitespace-nowrap">
                 {formatDate(latestCaptureData?.DateTime)}
               </Text>
-              <GPSIcon />
+              {/* <GPSIcon /> */}
             </div>
           ) : (
             "--"

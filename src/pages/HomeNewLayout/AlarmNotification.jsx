@@ -23,9 +23,9 @@ export const AlarmNotification = () => {
           </h4>
         </div>
 
-        <Text className=" font-manrope text-gray-400 text-[0.8em] mt-1 text-right">
-          (No Alerts or Changes to Alert with details of the LPR and Alert Type
-          during violation)
+        <Text className=" font-manrope text-gray-400 text-[0.7em] mt-1 text-right">
+          No Alerts or Changes to Alert with details of the LPR and Alert Type
+          during violation
         </Text>
       </div>
 

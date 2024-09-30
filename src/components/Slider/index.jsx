@@ -5,7 +5,7 @@ import "react-alice-carousel/lib/alice-carousel.css";
 const CustomPrevButton = ({ onClick }) => (
   <button
     onClick={onClick}
-    className="absolute top-1/2 left-0 transform -translate-y-1/2 text-white z-10"
+    className="absolute top-1/2 left-[4px] transform -translate-y-1/2 text-white z-10"
   >
     <img src="images/Leftarrow.svg" />
   </button>
@@ -14,7 +14,7 @@ const CustomPrevButton = ({ onClick }) => (
 const CustomNextButton = ({ onClick }) => (
   <button
     onClick={onClick}
-    className="absolute top-1/2 right-0 transform -translate-y-1/2 text-white  z-10"
+    className="absolute top-1/2 right-[4px] transform -translate-y-1/2 text-white  z-10"
   >
     <img src="images/Rightarrow.svg" />
   </button>

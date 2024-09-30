@@ -30,7 +30,7 @@ export const Carview = ({ latestCaptureData }) => {
   const carData = useSelector((state) => state.cars.carData);
 
   return (
-    <div className="flex flex-col h-full p-4 rounded-lg font-manrope font-extrabold ">
+    <div className="flex flex-col  p-4 rounded-lg font-manrope  ">
       <Heading size="headinglg" as="h1" className="text-black mb-4">
         Active Patrol
         <hr className="mt-4 border-gray-300 dark:border-gray-600" />

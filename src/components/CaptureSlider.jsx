@@ -6,7 +6,7 @@ export default function CaptureSlider({ dataArray }) {
   const sliderRef = React.useRef(null);
 
   return (
-    <div className=" relative p-2 md:self-stretch " style={{ maxWidth: '400px' }}>
+    <div className=" pb-2 md:self-stretch  rounded-[10px]" style={{ maxWidth: '400px' }}>
       <Slider
         responsive={{
           0: { items: 1 },
@@ -29,6 +29,9 @@ export default function CaptureSlider({ dataArray }) {
                   width: "100%",
                   height: "120px", 
                   objectFit: "cover",
+                  borderRadius: "0.9rem"
+                  
+
                   
                   
                 }}

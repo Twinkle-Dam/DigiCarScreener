@@ -39,21 +39,21 @@ export default function UserProfile({ ...props }) {
                 <span className="font-extrabold text-black-900">
                   {props.AlertLevel}
                 </span>
-                {" ,\u00A0"}
-                {`${props.LicensePlate},\u00A0${props.CarMake} / ${props.CarModel},\u00A0${props.State}`}
-                <br />
+                {"\u00A0"}
+                {` , ${props.LicensePlate}, \u00A0${props.CarMake}/ ${props.CarModel}, \u00A0${props.State}`}
+              </Text>
+              <Text as="p" className="mt-1 text-black-900 dark:text-white-a700">
                 {`${props.CameraID} | ${formatDate(props.DateTime)}`}
               </Text>
             </div>
             <div className="flex md:flex-col gap-2 w-40 mt-2 md:mt-0 md:absolute md:right-6">
               <AlertActionButton
-                label="Report"
+                label="REPORT"
                 className="bg-black-900 text-white-a700"
               />
-              <AlertActionButton label="Resolve" />
+              <AlertActionButton label="RESOLVE" />
             </div>
           </div>
-        
         </div>
       )}
     </>
