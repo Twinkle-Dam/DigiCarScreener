@@ -18,7 +18,7 @@ export default function ScanningTable() {
 
   return (
     <div className="w-full h-full">
-      <div className="flex flex-col gap-2 mt-4 bg-white-a700 dark:bg-dark-700 md:flex-col overflow-y-auto max-h-[80%]">
+      <div className="flex flex-col gap-2 mt-1 bg-white-a700 dark:bg-dark-700 md:flex-col overflow-y-auto max-h-[80%]">
         {carData.map((car, index) => (
           <div
             key={index}
@@ -29,7 +29,7 @@ export default function ScanningTable() {
               <Img
                 src={car.Images[0]}
                 alt={`Car Image`}
-                className="h-[50px] w-[100px] object-cover rounded-lg"
+                className="h-[60px] w-[70px] object-cover rounded-lg"
               />
             </div>
             {/* Render Camera ID and DateTime at the top left */}

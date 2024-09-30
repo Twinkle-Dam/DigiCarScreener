@@ -32,7 +32,7 @@ export const AlarmNotification = () => {
       <hr className="mt-2 border-gray-300 dark:border-gray-600" />
 
       {/* Scrollable Content Section */}
-      <div className="relative flex-1 h-[250px] overflow-y-auto p-2 mt-4 max-h-[200px]">
+      <div className="relative flex-1 h-[250px] overflow-y-auto p-2 mt-4 max-h-[250px]">
         {carData.length > 0 ? (
           <div className="flex flex-col gap-1">
             {carData.map((d, index) => (

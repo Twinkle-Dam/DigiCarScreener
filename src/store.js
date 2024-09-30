@@ -5,9 +5,8 @@ export const START_PATROL = "START_PATROL";
 export const STOP_PATROL = "STOP_PATROL";
 export const UPDATE_NOTIFICATION_COUNT = "UPDATE_NOTIFICATION_COUNT";
 
-
 const initialState = {
-  carData:[]
+  carData,
 };
 
 const carsReducer = (state = initialState, action) => {
@@ -46,7 +45,7 @@ const carsReducer = (state = initialState, action) => {
 const store = configureStore({
   reducer: {
     cars: carsReducer,
-    notifications: notificationReducer
+    notifications: notificationReducer,
   },
 });
 

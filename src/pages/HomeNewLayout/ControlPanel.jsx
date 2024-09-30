@@ -5,6 +5,7 @@ import { AlarmNotification } from "./AlarmNotification";
 import { updateNotificationCount } from "notificationReducer";
 import ScanningTable from "../../components/ScanningTableNew";
 import { Carview } from "./Carview";
+import Menu from "./Menu";
 
 export default function ControlPanel({ carData }) {
   const dispatch = useDispatch();
@@ -14,7 +15,6 @@ export default function ControlPanel({ carData }) {
   const [isStartButtonEnabled, setIsStartButtonEnabled] = useState(true);
   const [isStopButtonEnabled, setIsStopButtonEnabled] = useState(false);
   const [isAlertButtonEnabled, setIsAlertButtonEnabled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const audioCtxRef = useRef(null);
   const beepIntervalRef = useRef(null);
@@ -111,10 +111,6 @@ export default function ControlPanel({ carData }) {
     setIsAlertButtonEnabled(false);
   };
 
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
-  };
-
   useEffect(() => {
     return () => {
       stopBeeping();
@@ -126,10 +122,11 @@ export default function ControlPanel({ carData }) {
   return (
     <div className="flex w-full h-screen md:flex-wrap">
       {/* Sidebar - Enforcement Tab */}
-      <div className="dark:bg-slate-800 p-4 border-r border-gray-300 w-[10%] h-full shadow-lg md:w-1/2">
-        <img src="images/logoo.png" alt="Logo" className="mb-4" />
-
-        <div className="mt-20 space-y-4 flex flex-col gap-4">
+      <div className="flex flex-col justify-between dark:bg-slate-800 p-4 border-r border-gray-300 w-[10%] shadow-lg md:w-1/2">
+        <div>
+          <img src="images/logoo.png" alt="Logo" />
+        </div>
+        <div className="space-y-4 flex flex-col gap-4">
           {/* Start Button */}
           <div className="flex flex-col items-center">
             <div
@@ -203,72 +200,14 @@ export default function ControlPanel({ carData }) {
             </div>
             <p className="mt text-black">Notifications</p>
           </div>
-          {/*Menu Button */}
-          <div className="flex flex-col items-center relative z-50">
-            <button onClick={toggleMenu} className="mt-20 p-8">
-              <img
-                src="images/MenuIcon.svg"
-                alt="Menu"
-                className="w-full h-full mx-auto"
-              />
-            </button>
-            {isMenuOpen && (
-              <div
-                style={{ backgroundColor: "white" }}
-                className="absolute right-[-200px] top-[-150px] shadow-lg rounded-md mt-2 p-4 w-56"
-              >
-                <ul className="space-y-2 bg-white rounded-lg">
-                  <li className="flex items-center p-3 hover:bg-blue-100 rounded border-b border-blue-100 last:border-b-0">
-                    <img
-                      src="images/ChatBot.png"
-                      alt="ChatBot"
-                      className="w-6 h-6 mr-6"
-                    />
-                    <span>ChatBot</span>
-                  </li>
-                  <li className="flex items-center p-3 hover:bg-blue-100 rounded border-b border-blue-100 last:border-b-0">
-                    <img
-                      src="images/DarkTheme.png"
-                      alt="Dark Mode"
-                      className="w-6 h-6 mr-6"
-                    />
-                    <span>Dark Theme</span>
-                  </li>
-                  <li className="flex items-center p-3 hover:bg-blue-100 rounded border-b border-blue-100 last:border-b-0">
-                    <img
-                      src="images/Profile.png"
-                      alt="Profile"
-                      className="w-6 h-6 mr-6"
-                    />
-                    <span>Profile</span>
-                  </li>
-                  <li className="flex items-center p-3 hover:bg-blue-100 rounded border-b border-blue-100 last:border-b-0">
-                    <img
-                      src="images/Setting.png"
-                      alt="Settings"
-                      className="w-6 h-6 mr-6"
-                    />
-                    <span>Settings</span>
-                  </li>
-                  <li className="flex items-center p-3 hover:bg-blue-100 rounded">
-                    <img
-                      src="images/Logout.png"
-                      alt="Logout"
-                      className="w-6 h-6 mr-6"
-                    />
-                    <span>Logout</span>
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
         </div>
+        <Menu />
       </div>
 
       {/* Main Content */}
       <div
         style={{ backgroundColor: "rgb(237 237 237)" }}
-        className="p-6 w-full"
+        className="p-4 w-full"
       >
         <div className="flex sm:flex-col md:flex-col justify-between lg:flex-row h-auto md:space-y-0 md:space-x-2 gap-6">
           <div
@@ -289,7 +228,7 @@ export default function ControlPanel({ carData }) {
         {/* Patrol History with overflow handling */}
         <div
           style={{ backgroundColor: "white" }}
-          className="h-[52%] relative flex flex-col border rounded-lg mt-6 p-6 shadow-lg  "
+          className="h-[48%] relative flex flex-col border rounded-lg mt-4 p-4 shadow-lg  "
         >
           <Heading size="headinglg" as="h1" className="text-black  ">
             Patrol History
