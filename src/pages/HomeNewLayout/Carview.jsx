@@ -42,7 +42,7 @@ export const Carview = ({ latestCaptureData }) => {
           <LastPatrolStrap latestCaptureData={latestCaptureData} />
         </div>
       ) : (
-        <div className="flex h-[20vh] items-center justify-center text-black">
+        <div className="flex h-[20vh] items-center justify-center text-black dark:text-white-a700">
           No data Captured! Start Patrolling.
         </div>
       )}
